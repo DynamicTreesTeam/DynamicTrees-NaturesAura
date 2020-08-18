@@ -1,0 +1,22 @@
+Unsupposrted library path: /Users/harleyoconnor/Library/Mobile Documents/com~apple~CloudDocs/Programming/Minecraft/Mods/DynamicTrees-ExC/.DONE/DynamicTrees-NaturesAura/build/classes/java/api
+Unsupposrted library path: /Users/harleyoconnor/Library/Mobile Documents/com~apple~CloudDocs/Programming/Minecraft/Mods/DynamicTrees-ExC/.DONE/DynamicTrees-NaturesAura/build/resources/api
+Symbol range map extraction starting
+Processing 6 files
+startProcessing "maxhyper/dynamictreesnaturesaura/DynamicTreesNaturesAura.java" md5: 7e97a5994bc556338d3cfaced91092ae
+endProcessing "maxhyper/dynamictreesnaturesaura/DynamicTreesNaturesAura.java"
+
+startProcessing "maxhyper/dynamictreesnaturesaura/ModContent.java" md5: a77dc2a829bf3f578107ebf2e60ac03f
+endProcessing "maxhyper/dynamictreesnaturesaura/ModContent.java"
+
+startProcessing "maxhyper/dynamictreesnaturesaura/blocks/BlockDynamicLeavesAncient.java" md5: e65b2273f77da774b1c6e58190028373
+endProcessing "maxhyper/dynamictreesnaturesaura/blocks/BlockDynamicLeavesAncient.java"
+
+startProcessing "maxhyper/dynamictreesnaturesaura/proxy/ClientProxy.java" md5: 31e3cec4e8f1f2121dd66a358e8b2bee
+endProcessing "maxhyper/dynamictreesnaturesaura/proxy/ClientProxy.java"
+
+startProcessing "maxhyper/dynamictreesnaturesaura/proxy/CommonProxy.java" md5: ae2bf5b97872ccc62cf7d50e3f5cf9ed
+endProcessing "maxhyper/dynamictreesnaturesaura/proxy/CommonProxy.java"
+
+startProcessing "maxhyper/dynamictreesnaturesaura/trees/TreeAncient.java" md5: 398128011ee495bee64467a497923afb
+endProcessing "maxhyper/dynamictreesnaturesaura/trees/TreeAncient.java"
+

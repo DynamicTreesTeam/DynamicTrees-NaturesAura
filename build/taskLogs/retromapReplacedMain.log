@@ -1,0 +1,152 @@
+Processing 6 files
+Start Processing: maxhyper/dynamictreesnaturesaura/DynamicTreesNaturesAura.java
+New Key: class net/minecraftforge/fml/common/Mod
+Import: com.ferreusveritas.dynamictrees.ModConstants
+Import: maxhyper.dynamictreesnaturesaura.proxy.CommonProxy
+Import: net.minecraftforge.fml.common.Mod
+Import: net.minecraftforge.fml.common.Mod.EventHandler
+Import: net.minecraftforge.fml.common.SidedProxy
+Import: net.minecraftforge.fml.common.event.FMLInitializationEvent
+Import: net.minecraftforge.fml.common.event.FMLPostInitializationEvent
+Import: net.minecraftforge.fml.common.event.FMLPreInitializationEvent
+End  Processing: maxhyper/dynamictreesnaturesaura/DynamicTreesNaturesAura.java
+
+Start Processing: maxhyper/dynamictreesnaturesaura/ModContent.java
+New Key: class net/minecraftforge/fml/common/Mod
+New Key: class net/minecraftforge/event/RegistryEvent
+Rename method net/minecraft/block/Block/getDefaultState ()Lnet/minecraft/block/state/IBlockState;[2908,2923]::getDefaultState->func_176223_P
+Rename method net/minecraft/block/state/IBlockState/withProperty (Lnet/minecraft/block/properties/IProperty;Ljava/lang/Comparable;)Lnet/minecraft/block/state/IBlockState;[2924,2936]::withProperty->func_177226_a
+Rename method net/minecraft/block/Block/getDefaultState ()Lnet/minecraft/block/state/IBlockState;[3699,3714]::getDefaultState->func_176223_P
+New Key: class net/minecraftforge/event/RegistryEvent
+New Key: class net/minecraftforge/event/RegistryEvent
+New Key: class net/minecraft/client/renderer/block/statemap/StateMap
+Rename method net/minecraft/client/renderer/block/statemap/StateMap/Builder/ignore ([Lnet/minecraft/block/properties/IProperty;)Lnet/minecraft/client/renderer/block/statemap/StateMap$Builder;[5627,5633]::ignore->func_178442_a
+Rename field net/minecraft/block/BlockLeaves/DECAYABLE[5653,5662]::DECAYABLE->field_176237_a
+Rename method net/minecraft/client/renderer/block/statemap/StateMap/Builder/build ()Lnet/minecraft/client/renderer/block/statemap/StateMap;[5669,5674]::build->func_178441_a
+Import: com.ferreusveritas.dynamictrees.ModItems
+Import: com.ferreusveritas.dynamictrees.ModRecipes
+Import: com.ferreusveritas.dynamictrees.api.TreeRegistry
+Import: com.ferreusveritas.dynamictrees.api.WorldGenRegistry.BiomeDataBasePopulatorRegistryEvent
+Import: com.ferreusveritas.dynamictrees.api.client.ModelHelper
+Import: com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties
+Import: com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves
+Import: com.ferreusveritas.dynamictrees.blocks.BlockSurfaceRoot
+Import: com.ferreusveritas.dynamictrees.blocks.LeavesPaging
+Import: com.ferreusveritas.dynamictrees.blocks.LeavesProperties
+Import: com.ferreusveritas.dynamictrees.items.DendroPotion.DendroPotionType
+Import: com.ferreusveritas.dynamictrees.trees.Species
+Import: com.ferreusveritas.dynamictrees.trees.TreeFamily
+Import: de.ellpeck.naturesaura.blocks.ModBlocks
+Import: maxhyper.dynamictreesnaturesaura.blocks.BlockDynamicLeavesAncient
+Import: maxhyper.dynamictreesnaturesaura.trees.TreeAncient
+Import: net.minecraft.block.Block
+Import: net.minecraft.block.BlockLeaves
+Import: net.minecraft.client.renderer.block.statemap.StateMap
+Import: net.minecraft.item.Item
+Import: net.minecraft.item.ItemStack
+Import: net.minecraft.item.crafting.IRecipe
+Import: net.minecraft.util.ResourceLocation
+Import: net.minecraftforge.client.event.ModelRegistryEvent
+Import: net.minecraftforge.client.model.ModelLoader
+Import: net.minecraftforge.common.brewing.BrewingRecipeRegistry
+Import: net.minecraftforge.event.RegistryEvent
+Import: net.minecraftforge.fml.common.Mod
+Import: net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+Import: net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder
+Import: net.minecraftforge.fml.relauncher.Side
+Import: net.minecraftforge.fml.relauncher.SideOnly
+Import: net.minecraftforge.registries.IForgeRegistry
+Import: java.util.ArrayList
+Import: java.util.Collections
+Import: java.util.List
+End  Processing: maxhyper/dynamictreesnaturesaura/ModContent.java
+
+Start Processing: maxhyper/dynamictreesnaturesaura/blocks/BlockDynamicLeavesAncient.java
+FOUND CONSTR method maxhyper/dynamictreesnaturesaura/blocks/BlockDynamicLeavesAncient/BlockDynamicLeavesAncient ()V maxhyper/dynamictreesnaturesaura/blocks/BlockDynamicLeavesAncient
+Rename method net/minecraft/block/Block/setUnlocalizedName (Ljava/lang/String;)Lnet/minecraft/block/Block;[1461,1479]::setUnlocalizedName->func_149663_c
+Rename method net/minecraft/block/Block/getMapColor (Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/material/MapColor;[1535,1546]::getMapColor->func_180659_g
+Rename field net/minecraft/block/material/MapColor/PINK[1630,1634]::PINK->field_151671_v
+Rename method net/minecraft/block/Block/breakBlock (Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)V[2188,2198]::breakBlock->func_180663_b
+Rename method net/minecraft/block/Block/breakBlock (Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)V[2266,2276]::breakBlock->func_180663_b
+Rename method net/minecraft/world/World/removeTileEntity (Lnet/minecraft/util/math/BlockPos;)V[2318,2334]::removeTileEntity->func_175713_t
+Rename method net/minecraft/block/Block/updateTick (Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;Ljava/util/Random;)V[2375,2385]::updateTick->func_180650_b
+Rename method net/minecraft/block/Block/updateTick (Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;Ljava/util/Random;)V[2466,2476]::updateTick->func_180650_b
+Rename field net/minecraft/world/World/isRemote[2529,2537]::isRemote->field_72995_K
+Rename method net/minecraft/world/IBlockAccess/getTileEntity (Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/tileentity/TileEntity;[2584,2597]::getTileEntity->func_175625_s
+Rename method net/minecraft/world/World/setBlockState (Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)Z[2791,2804]::setBlockState->func_175656_a
+Rename method net/minecraft/block/Block/getDefaultState ()Lnet/minecraft/block/state/IBlockState;[2835,2850]::getDefaultState->func_176223_P
+Rename method net/minecraft/block/Block/randomDisplayTick (Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Ljava/util/Random;)V[2959,2976]::randomDisplayTick->func_180655_c
+Rename method net/minecraft/block/Block/randomDisplayTick (Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Ljava/util/Random;)V[3052,3069]::randomDisplayTick->func_180655_c
+Rename method net/minecraft/world/IBlockAccess/getBlockState (Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;[3146,3159]::getBlockState->func_180495_p
+Rename method net/minecraft/util/math/BlockPos/down ()Lnet/minecraft/util/math/BlockPos;[3164,3168]::down->func_177977_b
+Rename method net/minecraft/block/state/IBlockProperties/isFullBlock ()Z[3181,3192]::isFullBlock->func_185913_b
+Rename method net/minecraft/world/IBlockAccess/getTileEntity (Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/tileentity/TileEntity;[3238,3251]::getTileEntity->func_175625_s
+Rename method net/minecraft/util/math/Vec3i/getX ()I[3514,3518]::getX->func_177958_n
+Rename method net/minecraft/util/math/Vec3i/getY ()I[3555,3559]::getY->func_177956_o
+Rename method net/minecraft/util/math/Vec3i/getZ ()I[3576,3580]::getZ->func_177952_p
+New Key: class net/minecraft/block/BlockPlanks
+Rename method net/minecraft/block/BlockLeaves/getWoodType (I)Lnet/minecraft/block/BlockPlanks$EnumType;[3944,3955]::getWoodType->func_176233_b
+Rename method net/minecraft/block/ITileEntityProvider/createNewTileEntity (Lnet/minecraft/world/World;I)Lnet/minecraft/tileentity/TileEntity;[4034,4053]::createNewTileEntity->func_149915_a
+Import: com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves
+Import: de.ellpeck.naturesaura.NaturesAura
+Import: de.ellpeck.naturesaura.api.NaturesAuraAPI
+Import: de.ellpeck.naturesaura.blocks.ModBlocks
+Import: de.ellpeck.naturesaura.blocks.tiles.TileEntityAncientLeaves
+Import: de.ellpeck.naturesaura.reg.IModItem
+Import: maxhyper.dynamictreesnaturesaura.DynamicTreesNaturesAura
+Import: net.minecraft.block.BlockPlanks
+Import: net.minecraft.block.ITileEntityProvider
+Import: net.minecraft.block.material.MapColor
+Import: net.minecraft.block.state.IBlockState
+Import: net.minecraft.tileentity.TileEntity
+Import: net.minecraft.util.ResourceLocation
+Import: net.minecraft.util.math.BlockPos
+Import: net.minecraft.world.IBlockAccess
+Import: net.minecraft.world.World
+Import: net.minecraftforge.fml.common.event.FMLInitializationEvent
+Import: net.minecraftforge.fml.common.event.FMLPostInitializationEvent
+Import: net.minecraftforge.fml.common.event.FMLPreInitializationEvent
+Import: net.minecraftforge.fml.common.registry.GameRegistry
+Import: net.minecraftforge.fml.relauncher.Side
+Import: net.minecraftforge.fml.relauncher.SideOnly
+Import: java.util.Random
+End  Processing: maxhyper/dynamictreesnaturesaura/blocks/BlockDynamicLeavesAncient.java
+
+Start Processing: maxhyper/dynamictreesnaturesaura/proxy/ClientProxy.java
+Rename method net/minecraft/block/state/IBlockState/getBlock ()Lnet/minecraft/block/Block;[862,870]::getBlock->func_177230_c
+Import: com.ferreusveritas.dynamictrees.api.client.ModelHelper
+Import: com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves
+Import: maxhyper.dynamictreesnaturesaura.ModContent
+Import: maxhyper.dynamictreesnaturesaura.blocks.BlockDynamicLeavesAncient
+Import: net.minecraftforge.fml.relauncher.Side
+Import: net.minecraftforge.fml.relauncher.SideOnly
+End  Processing: maxhyper/dynamictreesnaturesaura/proxy/ClientProxy.java
+
+Start Processing: maxhyper/dynamictreesnaturesaura/proxy/CommonProxy.java
+End  Processing: maxhyper/dynamictreesnaturesaura/proxy/CommonProxy.java
+
+Start Processing: maxhyper/dynamictreesnaturesaura/trees/TreeAncient.java
+Rename method net/minecraft/block/Block/getBlockFromName (Ljava/lang/String;)Lnet/minecraft/block/Block;[774,790]::getBlockFromName->func_149684_b
+Rename method net/minecraft/block/Block/getBlockFromName (Ljava/lang/String;)Lnet/minecraft/block/Block;[860,876]::getBlockFromName->func_149684_b
+Rename method net/minecraft/block/Block/getBlockFromName (Ljava/lang/String;)Lnet/minecraft/block/Block;[947,963]::getBlockFromName->func_149684_b
+FOUND CONSTR method maxhyper/dynamictreesnaturesaura/trees/TreeAncient/SpeciesAncient/SpeciesAncient (Lcom/ferreusveritas/dynamictrees/trees/TreeFamily;)V maxhyper/dynamictreesnaturesaura/trees/TreeAncient/SpeciesAncient
+Rename method net/minecraft/util/math/MathHelper/clamp (FFF)F[1657,1662]::clamp->func_76131_a
+FOUND CONSTR method maxhyper/dynamictreesnaturesaura/trees/TreeAncient/TreeAncient ()V maxhyper/dynamictreesnaturesaura/trees/TreeAncient
+Rename method net/minecraft/block/Block/getDefaultState ()Lnet/minecraft/block/state/IBlockState;[2148,2163]::getDefaultState->func_176223_P
+Rename field net/minecraft/block/material/Material/WOOD[2319,2323]::WOOD->field_151575_d
+Rename method net/minecraft/block/state/IBlockState/getBlock ()Lnet/minecraft/block/Block;[2410,2418]::getBlock->func_177230_c
+Import: com.ferreusveritas.dynamictrees.blocks.BlockSurfaceRoot
+Import: com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenRoots
+Import: com.ferreusveritas.dynamictrees.trees.Species
+Import: com.ferreusveritas.dynamictrees.trees.TreeFamily
+Import: maxhyper.dynamictreesnaturesaura.DynamicTreesNaturesAura
+Import: maxhyper.dynamictreesnaturesaura.ModContent
+Import: net.minecraft.block.Block
+Import: net.minecraft.block.material.Material
+Import: net.minecraft.item.ItemStack
+Import: net.minecraft.util.ResourceLocation
+Import: net.minecraft.util.math.MathHelper
+Import: java.util.List
+Import: java.util.function.BiFunction
+End  Processing: maxhyper/dynamictreesnaturesaura/trees/TreeAncient.java
+

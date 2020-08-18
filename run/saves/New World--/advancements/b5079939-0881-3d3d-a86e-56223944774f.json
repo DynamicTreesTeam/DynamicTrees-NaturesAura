@@ -1,0 +1,59 @@
+{
+  "naturesaura:eye": {
+    "criteria": {
+      "eye": "2020-08-18 17:38:00 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/light_gray_dye_from_gray_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2020-08-18 17:40:52 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/light_blue_dye_from_lapis_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2020-08-18 17:40:52 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/pink_dye_from_red_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2020-08-18 17:40:52 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/lime_dye": {
+    "criteria": {
+      "has_bonemeal": "2020-08-18 17:40:52 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/gray_dye": {
+    "criteria": {
+      "has_bonemeal": "2020-08-18 17:40:52 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/magenta_dye_from_lapis_ink_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2020-08-18 17:40:52 +0100"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "beaches": "2020-08-18 17:37:49 +0100",
+      "plains": "2020-08-18 17:37:51 +0100",
+      "taiga": "2020-08-18 17:37:31 +0100",
+      "river": "2020-08-18 17:42:44 +0100"
+    },
+    "done": false
+  },
+  "minecraft:recipes/misc/light_gray_dye_from_ink_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2020-08-18 17:40:52 +0100"
+    },
+    "done": true
+  }
+}

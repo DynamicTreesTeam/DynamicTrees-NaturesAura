@@ -1,0 +1,7 @@
+# Blocks
+tile.leaves_ancient.name=Ancient Leaves
+tile.dynamictreesnaturesaura:ancientbranch.name=Dynamic Ancient Tree
+tile.dynamictreesnaturesaura:ancientroot.name=Dynamic Ancient Root
+
+# Items
+item.dynamictreesnaturesaura:ancientseed.name=Ancient Acorn
