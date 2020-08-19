@@ -1,9 +1,9 @@
-package maxhyper.dynamictreesnaturesaura.proxy;
+package com.harleyoconnor.dynamictreesnaturesaura.proxy;
 
 import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
-import maxhyper.dynamictreesnaturesaura.ModContent;
-import maxhyper.dynamictreesnaturesaura.blocks.BlockDynamicLeavesAncient;
+import com.harleyoconnor.dynamictreesnaturesaura.ModContent;
+import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesAncient;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

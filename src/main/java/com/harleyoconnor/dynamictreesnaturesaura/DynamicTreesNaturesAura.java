@@ -1,8 +1,8 @@
-package maxhyper.dynamictreesnaturesaura;
+package com.harleyoconnor.dynamictreesnaturesaura;
 
 import com.ferreusveritas.dynamictrees.ModConstants;
 
-import maxhyper.dynamictreesnaturesaura.proxy.CommonProxy;
+import com.harleyoconnor.dynamictreesnaturesaura.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -21,7 +21,7 @@ public class DynamicTreesNaturesAura {
 	@Mod.Instance
 	public static DynamicTreesNaturesAura instance;
 	
-	@SidedProxy(clientSide = "maxhyper.dynamictreesnaturesaura.proxy.ClientProxy", serverSide = "maxhyper.dynamictreesnaturesaura.proxy.CommonProxy") //com.
+	@SidedProxy(clientSide = "com.harleyoconnor.dynamictreesnaturesaura.proxy.ClientProxy", serverSide = "com.harleyoconnor.dynamictreesnaturesaura.proxy.CommonProxy") //com.
 	public static CommonProxy proxy;
 	
 	@EventHandler

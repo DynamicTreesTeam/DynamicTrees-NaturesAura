@@ -1,11 +1,11 @@
-package maxhyper.dynamictreesnaturesaura.trees;
+package com.harleyoconnor.dynamictreesnaturesaura.trees;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockSurfaceRoot;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenRoots;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
-import maxhyper.dynamictreesnaturesaura.DynamicTreesNaturesAura;
-import maxhyper.dynamictreesnaturesaura.ModContent;
+import com.harleyoconnor.dynamictreesnaturesaura.DynamicTreesNaturesAura;
+import com.harleyoconnor.dynamictreesnaturesaura.ModContent;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;

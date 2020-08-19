@@ -1,4 +1,4 @@
-package maxhyper.dynamictreesnaturesaura.blocks;
+package com.harleyoconnor.dynamictreesnaturesaura.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import de.ellpeck.naturesaura.NaturesAura;
@@ -6,7 +6,7 @@ import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import de.ellpeck.naturesaura.blocks.ModBlocks;
 import de.ellpeck.naturesaura.blocks.tiles.TileEntityAncientLeaves;
 import de.ellpeck.naturesaura.reg.IModItem;
-import maxhyper.dynamictreesnaturesaura.DynamicTreesNaturesAura;
+import com.harleyoconnor.dynamictreesnaturesaura.DynamicTreesNaturesAura;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
@@ -104,7 +104,7 @@ public class BlockDynamicLeavesAncient extends BlockDynamicLeaves implements IMo
 
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return (meta & 2) != 0 ? new TileEntityAncientLeaves() : null;
+        return new TileEntityAncientLeaves();
     }
 
 }

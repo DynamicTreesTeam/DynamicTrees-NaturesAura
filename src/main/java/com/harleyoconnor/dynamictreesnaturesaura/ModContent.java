@@ -1,4 +1,4 @@
-package maxhyper.dynamictreesnaturesaura;
+package com.harleyoconnor.dynamictreesnaturesaura;
 
 import com.ferreusveritas.dynamictrees.ModItems;
 import com.ferreusveritas.dynamictrees.ModRecipes;
@@ -14,8 +14,8 @@ import com.ferreusveritas.dynamictrees.items.DendroPotion.DendroPotionType;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import de.ellpeck.naturesaura.blocks.ModBlocks;
-import maxhyper.dynamictreesnaturesaura.blocks.BlockDynamicLeavesAncient;
-import maxhyper.dynamictreesnaturesaura.trees.TreeAncient;
+import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesAncient;
+import com.harleyoconnor.dynamictreesnaturesaura.trees.TreeAncient;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.renderer.block.statemap.StateMap;

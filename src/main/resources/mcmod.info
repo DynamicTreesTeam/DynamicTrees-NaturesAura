@@ -2,7 +2,7 @@
 {
   "modid": "dynamictreesnaturesaura",
   "name": "Dynamic Trees for Nature's Aura",
-  "description": "Adds compatibilities between Dynamic Trees and Nature's Aura",
+  "description": "Adds compatibilities between Dynamic Trees and Nature's Aura.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",

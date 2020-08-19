@@ -1,4 +1,4 @@
-package maxhyper.dynamictreesnaturesaura.proxy;
+package com.harleyoconnor.dynamictreesnaturesaura.proxy;
 
 public class CommonProxy {
 	
