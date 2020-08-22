@@ -11,6 +11,7 @@ import com.ferreusveritas.dynamictrees.blocks.BlockSurfaceRoot;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.items.DendroPotion.DendroPotionType;
+import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import de.ellpeck.naturesaura.blocks.ModBlocks;
@@ -42,6 +43,8 @@ import java.util.List;
 @ObjectHolder(DynamicTreesNaturesAura.MODID)
 public class ModContent {
 
+	public static Item itemAncientSeed;
+
 	public static BlockDynamicLeaves ancientLeaves;
 	public static BlockSurfaceRoot ancientRoot;
 	public static ILeavesProperties ancientLeavesProperties;
@@ -68,6 +71,8 @@ public class ModContent {
 		leaves.add(ancientLeaves);
 
 		TreeFamily ancientTree = new TreeAncient();
+		itemAncientSeed = ancientTree.getCommonSpecies().getSeedStack(1).getItem();
+
 		Collections.addAll(trees, ancientTree);
 
 		trees.forEach(tree -> tree.registerSpecies(Species.REGISTRY));
