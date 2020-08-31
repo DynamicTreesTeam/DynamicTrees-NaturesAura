@@ -4,6 +4,7 @@ import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.harleyoconnor.dynamictreesnaturesaura.DynamicTreesNaturesAura;
 import com.harleyoconnor.dynamictreesnaturesaura.ModContent;
+import com.harleyoconnor.dynamictreesnaturesaura.events.BrilliantFiberClickEvent;
 import de.ellpeck.naturesaura.NaturesAura;
 import de.ellpeck.naturesaura.api.recipes.TreeRitualRecipe;
 import de.ellpeck.naturesaura.api.recipes.ing.AmountIngredient;
@@ -15,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 
 import java.util.Arrays;
 
@@ -25,6 +27,7 @@ public class CommonProxy {
 	
 	public void init() {
 		new TreeRitualRecipe(new ResourceLocation(DynamicTreesNaturesAura.MODID, "ancientseed"), getIngredient(Blocks.SAPLING), new ItemStack(ModContent.itemAncientSeed), 200, getIngredient(Species.REGISTRY.getValue(new ResourceLocation("dynamictrees", "oak")).getSeedStack(1).getItem()), getIngredient(Blocks.YELLOW_FLOWER), getIngredient(Blocks.RED_FLOWER), getIngredient(Items.WHEAT_SEEDS), getIngredient(Items.REEDS), getIngredient(ModItems.GOLD_LEAF)).register();
+		MinecraftForge.EVENT_BUS.register(new BrilliantFiberClickEvent());
 	}
 	
 	public void postInit() {

@@ -14,6 +14,8 @@ import com.ferreusveritas.dynamictrees.items.DendroPotion.DendroPotionType;
 import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesDecayed;
+import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesGolden;
 import de.ellpeck.naturesaura.blocks.ModBlocks;
 import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesAncient;
 import com.harleyoconnor.dynamictreesnaturesaura.trees.TreeAncient;
@@ -34,6 +36,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import scala.actors.threadpool.Arrays;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +48,8 @@ public class ModContent {
 
 	public static Item itemAncientSeed;
 
+	public static BlockDynamicLeaves decayedLeaves;
+	public static BlockDynamicLeaves goldenLeaves;
 	public static BlockDynamicLeaves ancientLeaves;
 	public static BlockSurfaceRoot ancientRoot;
 	public static ILeavesProperties ancientLeavesProperties;
@@ -60,6 +65,17 @@ public class ModContent {
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 		IForgeRegistry<Block> registry = event.getRegistry();
 
+		decayedLeaves = new BlockDynamicLeavesDecayed();
+		registry.register(decayedLeaves);
+
+		goldenLeaves = new BlockDynamicLeavesGolden();
+		registry.register(goldenLeaves);
+
+		for (Species species : Species.REGISTRY) {
+			species.getFamily().addConnectableVanillaLeaves((state) -> state.getBlock() == decayedLeaves);
+			species.getFamily().addConnectableVanillaLeaves((state) -> state.getBlock() == ModBlocks.GOLDEN_LEAVES);
+		}
+
 		ancientLeaves = new BlockDynamicLeavesAncient();
 		registry.register(ancientLeaves);
 
@@ -68,7 +84,7 @@ public class ModContent {
 		ancientLeavesProperties.setDynamicLeavesState(ancientLeaves.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
 		ancientLeaves.setProperties(0, ancientLeavesProperties);
 
-		leaves.add(ancientLeaves);
+		Collections.addAll(leaves, decayedLeaves, goldenLeaves, ancientLeaves);
 
 		TreeFamily ancientTree = new TreeAncient();
 		itemAncientSeed = ancientTree.getCommonSpecies().getSeedStack(1).getItem();
