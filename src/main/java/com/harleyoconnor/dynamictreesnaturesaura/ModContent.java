@@ -2,14 +2,12 @@ package com.harleyoconnor.dynamictreesnaturesaura;
 
 import com.ferreusveritas.dynamictrees.ModItems;
 import com.ferreusveritas.dynamictrees.ModRecipes;
+import com.ferreusveritas.dynamictrees.ModTrees;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.WorldGenRegistry.BiomeDataBasePopulatorRegistryEvent;
 import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
-import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
-import com.ferreusveritas.dynamictrees.blocks.BlockSurfaceRoot;
-import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
-import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
+import com.ferreusveritas.dynamictrees.blocks.*;
 import com.ferreusveritas.dynamictrees.items.DendroPotion.DendroPotionType;
 import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.trees.Species;
@@ -19,7 +17,9 @@ import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesAncien
 import com.harleyoconnor.dynamictreesnaturesaura.trees.TreeAncient;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -37,6 +37,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = DynamicTreesNaturesAura.MODID)
