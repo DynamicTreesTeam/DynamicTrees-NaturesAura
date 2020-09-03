@@ -68,17 +68,17 @@ public class BlockDynamicLeavesGolden extends BlockDynamicLeaves {
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         super.updateTick(worldIn, pos, state, rand);
 
-        if (!worldIn.isRemote) {
-            int stage = state.getValue(STAGE);
-            if (stage < HIGHEST_STAGE) {
-                worldIn.setBlockState(pos, state.withProperty(STAGE, stage + 1));
-            }
+        if (worldIn.isRemote) return;
 
-            if (stage > 1) {
-                BlockPos offset = pos.offset(EnumFacing.random(rand));
-                if (worldIn.isBlockLoaded(offset))
-                    convert(worldIn, offset);
-            }
+        int stage = state.getValue(STAGE);
+        if (stage < HIGHEST_STAGE) {
+            worldIn.setBlockState(pos, state.withProperty(STAGE, stage + 1));
+        }
+
+        if (stage > 1) {
+            BlockPos offset = pos.offset(EnumFacing.random(rand));
+            if (worldIn.isBlockLoaded(offset))
+                convert(worldIn, offset);
         }
     }
 
