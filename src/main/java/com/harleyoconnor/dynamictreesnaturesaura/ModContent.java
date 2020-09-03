@@ -14,6 +14,7 @@ import com.ferreusveritas.dynamictrees.items.DendroPotion.DendroPotionType;
 import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import com.ferreusveritas.dynamictrees.trees.TreeOak;
 import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesDecayed;
 import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesGolden;
 import de.ellpeck.naturesaura.blocks.ModBlocks;
@@ -36,6 +37,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.commons.lang3.ArrayUtils;
 import scala.actors.threadpool.Arrays;
 
 import java.util.ArrayList;
@@ -52,7 +54,7 @@ public class ModContent {
 	public static BlockDynamicLeaves goldenLeaves;
 	public static BlockDynamicLeaves ancientLeaves;
 	public static BlockSurfaceRoot ancientRoot;
-	public static ILeavesProperties ancientLeavesProperties;
+	public static ILeavesProperties ancientLeavesProperties, goldenLeavesProperties;
 
 	public static List<BlockDynamicLeaves> leaves = new ArrayList<>();
 	public static ArrayList<TreeFamily> trees = new ArrayList<>();
@@ -71,9 +73,16 @@ public class ModContent {
 		goldenLeaves = new BlockDynamicLeavesGolden();
 		registry.register(goldenLeaves);
 
+		goldenLeavesProperties = setUpLeaves(ModBlocks.GOLDEN_LEAVES, "bare");
+
+		goldenLeavesProperties.setDynamicLeavesState(goldenLeaves.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
+		goldenLeaves.setProperties(0, goldenLeavesProperties);
+
 		for (Species species : Species.REGISTRY) {
-			species.getFamily().addConnectableVanillaLeaves((state) -> state.getBlock() == decayedLeaves);
-			species.getFamily().addConnectableVanillaLeaves((state) -> state.getBlock() == ModBlocks.GOLDEN_LEAVES);
+			if (species.getFamily() instanceof TreeOak) goldenLeavesProperties.setTree(species.getFamily());
+			final ILeavesProperties decayedLeavesProperties = setUpLeaves(ModBlocks.DECAYED_LEAVES, "bare");
+			decayedLeavesProperties.setDynamicLeavesState(decayedLeaves.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
+			decayedLeaves.properties = ArrayUtils.add(decayedLeaves.properties, decayedLeavesProperties);
 		}
 
 		ancientLeaves = new BlockDynamicLeavesAncient();

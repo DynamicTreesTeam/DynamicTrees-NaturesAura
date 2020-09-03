@@ -21,7 +21,7 @@ public final class BrilliantFiberClickEvent {
 
         if (!BlockDynamicLeavesGolden.convert(event.getWorld(), event.getPos())) return;
         event.setResult(Event.Result.ALLOW);
-        System.out.println("Reached.");
+        event.getEntityPlayer().swingArm(event.getHand());
 
         if (!event.getWorld().isRemote && !event.getEntityPlayer().isCreative()) stack.shrink(1);
     }

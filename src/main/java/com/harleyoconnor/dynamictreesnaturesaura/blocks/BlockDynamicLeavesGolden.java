@@ -1,14 +1,17 @@
 package com.harleyoconnor.dynamictreesnaturesaura.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
+import com.ferreusveritas.dynamictrees.trees.TreeOak;
 import com.harleyoconnor.dynamictreesnaturesaura.DynamicTreesNaturesAura;
 import com.harleyoconnor.dynamictreesnaturesaura.ModContent;
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -81,11 +84,12 @@ public class BlockDynamicLeavesGolden extends BlockDynamicLeaves {
 
     public static boolean convert(World world, BlockPos pos) {
         IBlockState state = world.getBlockState(pos);
-        if (!(state.getBlock() instanceof BlockDynamicLeavesAncient || state.getBlock() instanceof BlockDynamicLeavesGolden)) {
-            System.out.println("Reached.");
-            if (!world.isRemote) world.setBlockState(pos, ModContent.goldenLeaves.getDefaultState()
-                    .withProperty(DECAYABLE, state.getPropertyKeys().contains(DECAYABLE) ? state.getValue(DECAYABLE) : false));
-            return true;
+        if (state.getBlock() instanceof BlockDynamicLeaves) {
+            if (((BlockDynamicLeaves) state.getBlock()).getProperties(state).getTree() instanceof TreeOak && !(state.getBlock() instanceof BlockDynamicLeavesGolden)) {
+                if (!world.isRemote) world.setBlockState(pos, ModContent.goldenLeaves.getDefaultState()
+                        .withProperty(DECAYABLE, state.getPropertyKeys().contains(DECAYABLE) ? state.getValue(DECAYABLE) : false));
+                return true;
+            }
         }
         return false;
     }
