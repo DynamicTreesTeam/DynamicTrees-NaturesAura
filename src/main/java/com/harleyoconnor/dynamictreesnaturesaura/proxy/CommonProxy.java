@@ -1,11 +1,15 @@
 package com.harleyoconnor.dynamictreesnaturesaura.proxy;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
+import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.harleyoconnor.dynamictreesnaturesaura.DynamicTreesNaturesAura;
 import com.harleyoconnor.dynamictreesnaturesaura.ModContent;
+import com.harleyoconnor.dynamictreesnaturesaura.dropcreators.DropCreatorGoldLeaf;
+import com.harleyoconnor.dynamictreesnaturesaura.effects.DynamicLeavesDecayEffect;
 import com.harleyoconnor.dynamictreesnaturesaura.events.BrilliantFiberClickEvent;
 import de.ellpeck.naturesaura.NaturesAura;
+import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import de.ellpeck.naturesaura.api.recipes.TreeRitualRecipe;
 import de.ellpeck.naturesaura.api.recipes.ing.AmountIngredient;
 import de.ellpeck.naturesaura.items.ModItems;
@@ -26,8 +30,17 @@ public class CommonProxy {
 	}
 	
 	public void init() {
+		// Register tree ritual recipe for Ancient Acorn.
 		new TreeRitualRecipe(new ResourceLocation(DynamicTreesNaturesAura.MODID, "ancientseed"), getIngredient(Blocks.SAPLING), new ItemStack(ModContent.itemAncientSeed), 200, getIngredient(Species.REGISTRY.getValue(new ResourceLocation("dynamictrees", "oak")).getSeedStack(1).getItem()), getIngredient(Blocks.YELLOW_FLOWER), getIngredient(Blocks.RED_FLOWER), getIngredient(Items.WHEAT_SEEDS), getIngredient(Items.REEDS), getIngredient(ModItems.GOLD_LEAF)).register();
+
+		// Register brilliant fiber click event for dynamic leaves.
 		MinecraftForge.EVENT_BUS.register(new BrilliantFiberClickEvent());
+
+		// Add drain spot effect for decaying dynamic leaves.
+		NaturesAuraAPI.DRAIN_SPOT_EFFECTS.put(DynamicLeavesDecayEffect.NAME, DynamicLeavesDecayEffect::new);
+
+		// Register golden leaf drop creator to global species.
+		TreeRegistry.registerDropCreator(null, new DropCreatorGoldLeaf());
 	}
 	
 	public void postInit() {

@@ -3,18 +3,12 @@ package com.harleyoconnor.dynamictreesnaturesaura.blocks.multi;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicSapling;
 import com.harleyoconnor.dynamictreesnaturesaura.DynamicTreesNaturesAura;
-import de.ellpeck.naturesaura.NaturesAura;
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import de.ellpeck.naturesaura.api.multiblock.IMultiblock;
 import de.ellpeck.naturesaura.api.multiblock.Matcher;
 import de.ellpeck.naturesaura.blocks.ModBlocks;
-import net.minecraft.block.BlockLog;
-import net.minecraft.block.BlockSapling;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.HashMap;
 
 public class Multiblocks {
 
