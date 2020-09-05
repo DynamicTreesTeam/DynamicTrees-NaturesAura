@@ -1,21 +1,20 @@
 package com.harleyoconnor.dynamictreesnaturesaura.proxy;
 
 import com.ferreusveritas.dynamictrees.ModConstants;
-import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.harleyoconnor.dynamictreesnaturesaura.DynamicTreesNaturesAura;
 import com.harleyoconnor.dynamictreesnaturesaura.ModConfig;
 import com.harleyoconnor.dynamictreesnaturesaura.ModContent;
-import com.harleyoconnor.dynamictreesnaturesaura.dropcreators.DropCreatorGoldLeaf;
+import com.harleyoconnor.dynamictreesnaturesaura.dropcreators.DropCreatorGoldenLeaves;
 import com.harleyoconnor.dynamictreesnaturesaura.effects.DynamicLeavesDecayEffect;
 import com.harleyoconnor.dynamictreesnaturesaura.events.BrilliantFiberClickEvent;
-import de.ellpeck.naturesaura.NaturesAura;
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import de.ellpeck.naturesaura.api.recipes.TreeRitualRecipe;
-import de.ellpeck.naturesaura.api.recipes.ing.AmountIngredient;
+import de.ellpeck.naturesaura.blocks.ModBlocks;
 import de.ellpeck.naturesaura.items.ModItems;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -41,17 +40,26 @@ public class CommonProxy {
 		// Add drain spot effect for decaying dynamic leaves.
 		NaturesAuraAPI.DRAIN_SPOT_EFFECTS.put(DynamicLeavesDecayEffect.NAME, DynamicLeavesDecayEffect::new);
 
-		// Register golden leaf drop creator to global species.
-		DropCreatorGoldLeaf dropCreator = new DropCreatorGoldLeaf();
+		// Create drop creator for golden leaves.
+		DropCreatorGoldenLeaves dropCreator = new DropCreatorGoldenLeaves();
 
+		// Register golden leaf drop creator to global species.
 		if (ModConfig.GOLD_LEAF_NEEDS_OAK) {
 			TreeRegistry.registerDropCreator(new ResourceLocation(ModConstants.MODID, "oak"), dropCreator);
 			TreeRegistry.registerDropCreator(new ResourceLocation(ModConstants.MODID, "apple"), dropCreator);
 			TreeRegistry.registerDropCreator(new ResourceLocation(ModConstants.MODID, "oakswamp"), dropCreator);
 		} else TreeRegistry.registerDropCreator(null, dropCreator);
+
+		registerSaplingReplacement(ModBlocks.ANCIENT_SAPLING, "ancient");
 	}
 	
 	public void postInit() {
+	}
+
+	private static void registerSaplingReplacement(Block saplingBlock, String speciesName) {
+		IBlockState sapling = saplingBlock.getDefaultState();
+		Species species = TreeRegistry.findSpecies(new ResourceLocation(DynamicTreesNaturesAura.MODID, speciesName));
+		TreeRegistry.registerSaplingReplacer(sapling, species);
 	}
 
 	private static Ingredient getIngredient(Block... blocks) {

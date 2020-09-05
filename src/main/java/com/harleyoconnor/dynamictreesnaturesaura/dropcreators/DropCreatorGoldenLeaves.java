@@ -17,14 +17,12 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Random;
 
-public class DropCreatorGoldLeaf extends DropCreator {
+public class DropCreatorGoldenLeaves extends DropCreator {
 
-    private final ItemStack goldLeaves;
     private final boolean requiresOak;
 
-    public DropCreatorGoldLeaf() {
+    public DropCreatorGoldenLeaves() {
         super(new ResourceLocation(DynamicTreesNaturesAura.MODID, ModItems.GOLD_LEAF.getRegistryName().getResourceDomain()));
-        this.goldLeaves = new ItemStack(ModItems.GOLD_LEAF, 1, 0);
         this.requiresOak = ModConfig.GOLD_LEAF_NEEDS_OAK;
     }
 
