@@ -3,6 +3,7 @@ package com.harleyoconnor.dynamictreesnaturesaura.blocks;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import com.ferreusveritas.dynamictrees.trees.TreeOak;
 import com.harleyoconnor.dynamictreesnaturesaura.DynamicTreesNaturesAura;
+import com.harleyoconnor.dynamictreesnaturesaura.ModConfig;
 import com.harleyoconnor.dynamictreesnaturesaura.ModContent;
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import de.ellpeck.naturesaura.items.ModItems;
@@ -111,9 +112,10 @@ public class BlockDynamicLeavesGolden extends BlockDynamicLeaves {
     public static boolean convert(World world, BlockPos pos) {
         IBlockState state = world.getBlockState(pos);
         if (state.getBlock() instanceof BlockDynamicLeaves) {
-            if (((BlockDynamicLeaves) state.getBlock()).getProperties(state).getTree() instanceof TreeOak && !(state.getBlock() instanceof BlockDynamicLeavesGolden)) {
+            if ((((BlockDynamicLeaves) state.getBlock()).getProperties(state).getTree() instanceof TreeOak || !ModConfig.GOLD_LEAF_NEEDS_OAK) && !(state.getBlock() instanceof BlockDynamicLeavesGolden)) {
                 if (!world.isRemote) world.setBlockState(pos, ModContent.goldenLeaves.getDefaultState()
-                        .withProperty(DECAYABLE, state.getPropertyKeys().contains(DECAYABLE) ? state.getValue(DECAYABLE) : false));
+                        .withProperty(DECAYABLE, state.getPropertyKeys().contains(DECAYABLE) ? state.getValue(DECAYABLE) : false)
+                        .withProperty(HYDRO, state.getValue(HYDRO)));
                 return true;
             }
         }

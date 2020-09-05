@@ -39,7 +39,7 @@ dependencies {
     //compile "some.group:artifact:version:classifier"
     //compile "some.group:artifact:version"
 
-    compile files('libs/DynamicTrees-1.12.2-0.9.8.jar')
+    compile files('libs/DynamicTrees-1.12.2-0.9.10.jar')
     compile files('libs/NaturesAura-18.1.jar')
       
     // real examples

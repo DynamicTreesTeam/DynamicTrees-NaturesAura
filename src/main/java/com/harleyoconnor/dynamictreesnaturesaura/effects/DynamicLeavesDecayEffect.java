@@ -25,6 +25,7 @@ import net.minecraft.world.chunk.Chunk;
 import java.util.List;
 import java.util.Random;
 
+import static com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves.HYDRO;
 import static com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesGolden.HIGHEST_STAGE;
 
 public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
@@ -78,7 +79,7 @@ public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
 
                 IBlockState newState = null;
                 if (block instanceof BlockDecayedLeaves || block instanceof BlockDynamicLeaves) {
-                    newState = ModContent.decayedLeaves.getDefaultState();
+                    newState = ModContent.decayedLeaves.getDefaultState().withProperty(HYDRO, state.getValue(HYDRO));
                 }
                 if (newState != null)
                     world.setBlockState(grassPos, newState);

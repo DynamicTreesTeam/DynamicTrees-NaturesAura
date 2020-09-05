@@ -74,16 +74,35 @@ public class ModContent {
 		goldenLeaves = new BlockDynamicLeavesGolden();
 		registry.register(goldenLeaves);
 
-		goldenLeavesProperties = setUpLeaves(ModBlocks.GOLDEN_LEAVES, "bare");
+		if (ModConfig.GOLD_LEAF_NEEDS_OAK) {
+			goldenLeavesProperties = setUpLeaves(ModBlocks.GOLDEN_LEAVES, "deciduous");
 
-		goldenLeavesProperties.setDynamicLeavesState(goldenLeaves.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
-		goldenLeaves.setProperties(0, goldenLeavesProperties);
+			goldenLeavesProperties.setDynamicLeavesState(goldenLeaves.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
+		}
 
+		final List<TreeFamily> registeredFamilies = new ArrayList<>();
+
+		// TODO: Adding to DynamicLeaves' .properties doesn't do anything.
+		// Could use separate blocks for each tree? Localisation issues may arise?
 		for (Species species : Species.REGISTRY) {
-			if (species.getFamily() instanceof TreeOak) goldenLeavesProperties.setTree(species.getFamily());
+			if (registeredFamilies.contains(species.getFamily())) continue;
+
+			if (ModConfig.GOLD_LEAF_NEEDS_OAK) if (species.getFamily() instanceof TreeOak) {
+				goldenLeavesProperties.setTree(species.getFamily());
+				goldenLeaves.setProperties(0, goldenLeavesProperties);
+			} else {
+				final ILeavesProperties goldLeavesProperties = setUpLeaves(ModBlocks.GOLDEN_LEAVES, "deciduous");
+				goldLeavesProperties.setTree(species.getFamily());
+				goldLeavesProperties.setDynamicLeavesState(goldenLeaves.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
+				goldenLeaves.properties = ArrayUtils.add(goldenLeaves.properties, goldLeavesProperties);
+			}
+
 			final ILeavesProperties decayedLeavesProperties = setUpLeaves(ModBlocks.DECAYED_LEAVES, "bare");
+			decayedLeavesProperties.setTree(species.getFamily());
 			decayedLeavesProperties.setDynamicLeavesState(decayedLeaves.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
 			decayedLeaves.properties = ArrayUtils.add(decayedLeaves.properties, decayedLeavesProperties);
+
+			registeredFamilies.add(species.getFamily());
 		}
 
 		ancientLeaves = new BlockDynamicLeavesAncient();

@@ -1,8 +1,13 @@
 package com.harleyoconnor.dynamictreesnaturesaura.events;
 
+import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
+import com.ferreusveritas.dynamictrees.trees.TreeOak;
+import com.harleyoconnor.dynamictreesnaturesaura.ModConfig;
 import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesGolden;
 import de.ellpeck.naturesaura.items.ModItems;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
@@ -16,7 +21,9 @@ public final class BrilliantFiberClickEvent {
 
         if (!stack.getItem().equals(ModItems.GOLD_FIBER)) return;
 
-        if (!(event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockDynamicLeaves)) return;
+        IBlockState state = event.getWorld().getBlockState(event.getPos());
+
+        if (!(state.getBlock() instanceof BlockDynamicLeaves)) return;
         event.setCanceled(true);
 
         if (!BlockDynamicLeavesGolden.convert(event.getWorld(), event.getPos())) return;

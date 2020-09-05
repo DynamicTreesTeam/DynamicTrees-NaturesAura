@@ -10,7 +10,7 @@ import de.ellpeck.naturesaura.blocks.ModBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class Multiblocks {
+public final class Multiblocks {
 
     public static final IMultiblock DYNAMIC_TREE_RITUAL = NaturesAuraAPI.instance().createMultiblock(
             new ResourceLocation(DynamicTreesNaturesAura.MODID, "tree_ritual_dynamic"),

@@ -1,9 +1,11 @@
 package com.harleyoconnor.dynamictreesnaturesaura.proxy;
 
+import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.harleyoconnor.dynamictreesnaturesaura.DynamicTreesNaturesAura;
+import com.harleyoconnor.dynamictreesnaturesaura.ModConfig;
 import com.harleyoconnor.dynamictreesnaturesaura.ModContent;
 import com.harleyoconnor.dynamictreesnaturesaura.dropcreators.DropCreatorGoldLeaf;
 import com.harleyoconnor.dynamictreesnaturesaura.effects.DynamicLeavesDecayEffect;
@@ -40,7 +42,13 @@ public class CommonProxy {
 		NaturesAuraAPI.DRAIN_SPOT_EFFECTS.put(DynamicLeavesDecayEffect.NAME, DynamicLeavesDecayEffect::new);
 
 		// Register golden leaf drop creator to global species.
-		TreeRegistry.registerDropCreator(null, new DropCreatorGoldLeaf());
+		DropCreatorGoldLeaf dropCreator = new DropCreatorGoldLeaf();
+
+		if (ModConfig.GOLD_LEAF_NEEDS_OAK) {
+			TreeRegistry.registerDropCreator(new ResourceLocation(ModConstants.MODID, "oak"), dropCreator);
+			TreeRegistry.registerDropCreator(new ResourceLocation(ModConstants.MODID, "apple"), dropCreator);
+			TreeRegistry.registerDropCreator(new ResourceLocation(ModConstants.MODID, "oakswamp"), dropCreator);
+		} else TreeRegistry.registerDropCreator(null, dropCreator);
 	}
 	
 	public void postInit() {

@@ -2,7 +2,9 @@ package com.harleyoconnor.dynamictreesnaturesaura.dropcreators;
 
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
 import com.ferreusveritas.dynamictrees.trees.Species;
+import com.ferreusveritas.dynamictrees.trees.TreeOak;
 import com.harleyoconnor.dynamictreesnaturesaura.DynamicTreesNaturesAura;
+import com.harleyoconnor.dynamictreesnaturesaura.ModConfig;
 import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesGolden;
 import de.ellpeck.naturesaura.items.ModItems;
 import net.minecraft.block.state.IBlockState;
@@ -18,10 +20,12 @@ import java.util.Random;
 public class DropCreatorGoldLeaf extends DropCreator {
 
     private final ItemStack goldLeaves;
+    private final boolean requiresOak;
 
     public DropCreatorGoldLeaf() {
         super(new ResourceLocation(DynamicTreesNaturesAura.MODID, ModItems.GOLD_LEAF.getRegistryName().getResourceDomain()));
         this.goldLeaves = new ItemStack(ModItems.GOLD_LEAF, 1, 0);
+        this.requiresOak = ModConfig.GOLD_LEAF_NEEDS_OAK;
     }
 
     @Override
@@ -36,6 +40,8 @@ public class DropCreatorGoldLeaf extends DropCreator {
 
     private List<ItemStack> getDrops (IBlockAccess access, Species species, BlockPos leafPos, Random random, List<ItemStack> dropList, int fortune) {
         if (!(access.getBlockState(leafPos).getBlock() instanceof BlockDynamicLeavesGolden)) return dropList;
+
+        if (!(species instanceof TreeOak.SpeciesOak || species instanceof TreeOak.SpeciesAppleOak || species instanceof TreeOak.SpeciesSwampOak) && this.requiresOak) return dropList;
 
         IBlockState state = access.getBlockState(leafPos);
         BlockDynamicLeavesGolden.addDrops(dropList, access, leafPos, state, fortune);
