@@ -1,5 +1,6 @@
 package com.harleyoconnor.dynamictreesnaturesaura.blocks;
 
+import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import com.ferreusveritas.dynamictrees.trees.TreeOak;
 import com.harleyoconnor.dynamictreesnaturesaura.DynamicTreesNaturesAura;
@@ -35,7 +36,13 @@ public class BlockDynamicLeavesGolden extends BlockDynamicLeaves {
     public static final int HIGHEST_STAGE = 3;
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, HIGHEST_STAGE);
 
-    public BlockDynamicLeavesGolden() {
+    /*public BlockDynamicLeavesGolden(String speciesName) {
+        super();
+        setRegistryName(DynamicTreesNaturesAura.MODID, "leaves_golden_" + speciesName);
+        setUnlocalizedName("leaves_golden");
+    }*/
+
+    public BlockDynamicLeavesGolden () {
         super();
         setRegistryName(DynamicTreesNaturesAura.MODID, "leaves_golden");
         setUnlocalizedName("leaves_golden");
@@ -51,6 +58,11 @@ public class BlockDynamicLeavesGolden extends BlockDynamicLeaves {
         ArrayList<ItemStack> drops = new ArrayList<>();
         addDrops(drops, blockAccess, pos, blockAccess.getBlockState(pos), fortune);
         return drops;
+    }
+
+    @Override
+    public int branchSupport(IBlockState blockState, IBlockAccess blockAccess, BlockBranch branch, BlockPos pos, EnumFacing dir, int radius) {
+        return radius == 1 ? BlockBranch.setSupport(0, 1) : 0;
     }
 
     @Override

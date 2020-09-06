@@ -1,10 +1,12 @@
 package com.harleyoconnor.dynamictreesnaturesaura;
 
+import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.ModItems;
 import com.ferreusveritas.dynamictrees.ModRecipes;
 import com.ferreusveritas.dynamictrees.ModTrees;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.WorldGenRegistry.BiomeDataBasePopulatorRegistryEvent;
+import com.ferreusveritas.dynamictrees.api.cells.ICellKit;
 import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.blocks.*;
@@ -55,7 +57,7 @@ public class ModContent {
 	public static BlockDynamicLeaves goldenLeaves;
 	public static BlockDynamicLeaves ancientLeaves;
 	public static BlockSurfaceRoot ancientRoot;
-	public static ILeavesProperties ancientLeavesProperties, goldenLeavesProperties;
+	public static ILeavesProperties ancientLeavesProperties, goldenLeavesProperties, decayedLeavesProperties;
 
 	public static List<BlockDynamicLeaves> leaves = new ArrayList<>();
 	public static ArrayList<TreeFamily> trees = new ArrayList<>();
@@ -74,10 +76,14 @@ public class ModContent {
 		goldenLeaves = new BlockDynamicLeavesGolden();
 		registry.register(goldenLeaves);
 
-		if (ModConfig.GOLD_LEAF_NEEDS_OAK) {
-			goldenLeavesProperties = setUpLeaves(ModBlocks.GOLDEN_LEAVES, "deciduous");
+		TreeOak oakTree = (TreeOak) Species.REGISTRY.getValue(new ResourceLocation(ModConstants.MODID, "oak")).getFamily();
 
+		if (ModConfig.GOLD_LEAF_NEEDS_OAK) {
+			goldenLeavesProperties = setUpLeaves(ModBlocks.GOLDEN_LEAVES, TreeRegistry.findCellKit("deciduous"));
 			goldenLeavesProperties.setDynamicLeavesState(goldenLeaves.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
+			goldenLeavesProperties.setTree(oakTree);
+
+			goldenLeaves.setProperties(0, goldenLeavesProperties);
 		}
 
 		final List<TreeFamily> registeredFamilies = new ArrayList<>();
@@ -85,19 +91,17 @@ public class ModContent {
 		// TODO: Adding to DynamicLeaves' .properties doesn't do anything.
 		// Could use separate blocks for each tree? Localisation issues may arise?
 		for (Species species : Species.REGISTRY) {
-			if (registeredFamilies.contains(species.getFamily())) continue;
+			// if (registeredFamilies.contains(species.getFamily())) continue;
 
-			if (ModConfig.GOLD_LEAF_NEEDS_OAK) if (species.getFamily() instanceof TreeOak) {
-				goldenLeavesProperties.setTree(species.getFamily());
-				goldenLeaves.setProperties(0, goldenLeavesProperties);
-			} else {
-				final ILeavesProperties goldLeavesProperties = setUpLeaves(ModBlocks.GOLDEN_LEAVES, "deciduous");
+			if (!ModConfig.GOLD_LEAF_NEEDS_OAK) {
+				// final BlockDynamicLeaves goldenLeaves = new BlockDynamicLeavesGolden(species.getRegistryName().getResourceDomain());
+				final ILeavesProperties goldLeavesProperties = setUpLeaves(ModBlocks.GOLDEN_LEAVES, species.getLeavesProperties().getCellKit());
 				goldLeavesProperties.setTree(species.getFamily());
 				goldLeavesProperties.setDynamicLeavesState(goldenLeaves.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
-				goldenLeaves.properties = ArrayUtils.add(goldenLeaves.properties, goldLeavesProperties);
+				goldenLeaves.setProperties(0, goldLeavesProperties);
 			}
 
-			final ILeavesProperties decayedLeavesProperties = setUpLeaves(ModBlocks.DECAYED_LEAVES, "bare");
+			final ILeavesProperties decayedLeavesProperties = setUpLeaves(ModBlocks.DECAYED_LEAVES, species.getLeavesProperties().getCellKit());
 			decayedLeavesProperties.setTree(species.getFamily());
 			decayedLeavesProperties.setDynamicLeavesState(decayedLeaves.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
 			decayedLeaves.properties = ArrayUtils.add(decayedLeaves.properties, decayedLeavesProperties);
@@ -108,7 +112,7 @@ public class ModContent {
 		ancientLeaves = new BlockDynamicLeavesAncient();
 		registry.register(ancientLeaves);
 
-		ancientLeavesProperties = setUpLeaves(ModBlocks.ANCIENT_LEAVES, "deciduous");
+		ancientLeavesProperties = setUpLeaves(ModBlocks.ANCIENT_LEAVES, TreeRegistry.findCellKit("deciduous"));
 
 		ancientLeavesProperties.setDynamicLeavesState(ancientLeaves.getDefaultState().withProperty(BlockDynamicLeaves.TREE, 0));
 		ancientLeaves.setProperties(0, ancientLeavesProperties);
@@ -127,12 +131,12 @@ public class ModContent {
 		registry.registerAll(treeBlocks.toArray(new Block[treeBlocks.size()]));
 	}
 
-	public static ILeavesProperties setUpLeaves (Block primitiveLeavesBlock, String cellKit){
+	public static ILeavesProperties setUpLeaves (Block primitiveLeavesBlock, ICellKit cellKit){
 		ILeavesProperties leavesProperties;
 		leavesProperties = new LeavesProperties(
 				primitiveLeavesBlock.getDefaultState(),
 				new ItemStack(primitiveLeavesBlock, 1, 0),
-				TreeRegistry.findCellKit(cellKit))
+				cellKit)
 		{
 			@Override public ItemStack getPrimitiveLeavesItemStack() {
 				return new ItemStack(primitiveLeavesBlock, 1, 0);
