@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid= DynamicTreesNaturesAura.MODID, name= DynamicTreesNaturesAura.NAME, dependencies = DynamicTreesNaturesAura.DEPENDENCIES)
+@Mod(modid= DynamicTreesNaturesAura.MODID, name= DynamicTreesNaturesAura.NAME, dependencies = DynamicTreesNaturesAura.DEPENDENCIES, updateJSON = "http://harleyoconnor.com/mods/minecraft/dynamic-trees-natures-aura/version-info.json")
 public class DynamicTreesNaturesAura {
 	
 	public static final String MODID = "dynamictreesnaturesaura";
