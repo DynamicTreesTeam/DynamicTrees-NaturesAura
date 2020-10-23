@@ -1,7 +1,12 @@
 package com.harleyoconnor.dynamictreesnaturesaura.effects;
 
+import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
+import com.ferreusveritas.dynamictrees.trees.Species;
+import com.ferreusveritas.dynamictrees.trees.TreeFamilyVanilla;
 import com.harleyoconnor.dynamictreesnaturesaura.ModContent;
+import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesDecayed;
+import com.harleyoconnor.dynamictreesnaturesaura.util.SpeciesUtils;
 import de.ellpeck.naturesaura.ModConfig;
 import de.ellpeck.naturesaura.NaturesAura;
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
@@ -78,9 +83,12 @@ public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
                 Block block = state.getBlock();
 
                 IBlockState newState = null;
-                if (block instanceof BlockDecayedLeaves || block instanceof BlockDynamicLeaves) {
-                    newState = ModContent.decayedLeaves.getDefaultState().withProperty(HYDRO, state.getValue(HYDRO));
+                if (!(block instanceof BlockDynamicLeavesDecayed) && block instanceof BlockDynamicLeaves) {
+                    final Species commonSpeices = SpeciesUtils.getSpeciesFromLeaveState(state);
+                    if (commonSpeices != Species.NULLSPECIES)
+                        newState = ModContent.decayedLeavesVariants.get(commonSpeices).getDefaultState().withProperty(HYDRO, state.getValue(HYDRO));
                 }
+
                 if (newState != null)
                     world.setBlockState(grassPos, newState);
             }

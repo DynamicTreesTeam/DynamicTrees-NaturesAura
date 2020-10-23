@@ -15,16 +15,9 @@ import java.util.Random;
 
 public class BlockDynamicLeavesDecayed extends BlockDynamicLeaves {
 
-    /*public BlockDynamicLeavesDecayed(String speciesName) {
-        super();
-        setRegistryName(DynamicTreesNaturesAura.MODID, "leaves_decayed_" + speciesName);
-        setUnlocalizedName("leaves_decayed");
-    }*/
-
-    public BlockDynamicLeavesDecayed () {
-        super();
-        setRegistryName(DynamicTreesNaturesAura.MODID, "leaves_decayed");
-        setUnlocalizedName("leaves_decayed");
+    public BlockDynamicLeavesDecayed(String speciesName) {
+        this.setRegistryName(DynamicTreesNaturesAura.MODID, "leaves_decayed_" + speciesName);
+        this.setUnlocalizedName("leaves_decayed");
     }
 
     @Override

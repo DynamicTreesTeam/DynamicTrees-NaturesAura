@@ -1,11 +1,15 @@
 package com.harleyoconnor.dynamictreesnaturesaura.blocks;
 
+import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
+import com.ferreusveritas.dynamictrees.trees.Species;
+import com.ferreusveritas.dynamictrees.trees.TreeFamilyVanilla;
 import com.ferreusveritas.dynamictrees.trees.TreeOak;
 import com.harleyoconnor.dynamictreesnaturesaura.DynamicTreesNaturesAura;
 import com.harleyoconnor.dynamictreesnaturesaura.ModConfig;
 import com.harleyoconnor.dynamictreesnaturesaura.ModContent;
+import com.harleyoconnor.dynamictreesnaturesaura.util.SpeciesUtils;
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import de.ellpeck.naturesaura.items.ModItems;
 import net.minecraft.block.Block;
@@ -36,15 +40,8 @@ public class BlockDynamicLeavesGolden extends BlockDynamicLeaves {
     public static final int HIGHEST_STAGE = 3;
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, HIGHEST_STAGE);
 
-    /*public BlockDynamicLeavesGolden(String speciesName) {
-        super();
+    public BlockDynamicLeavesGolden(String speciesName) {
         setRegistryName(DynamicTreesNaturesAura.MODID, "leaves_golden_" + speciesName);
-        setUnlocalizedName("leaves_golden");
-    }*/
-
-    public BlockDynamicLeavesGolden () {
-        super();
-        setRegistryName(DynamicTreesNaturesAura.MODID, "leaves_golden");
         setUnlocalizedName("leaves_golden");
     }
 
@@ -125,10 +122,14 @@ public class BlockDynamicLeavesGolden extends BlockDynamicLeaves {
         IBlockState state = world.getBlockState(pos);
         if (state.getBlock() instanceof BlockDynamicLeaves) {
             if ((((BlockDynamicLeaves) state.getBlock()).getProperties(state).getTree() instanceof TreeOak || !ModConfig.GOLD_LEAF_NEEDS_OAK) && !(state.getBlock() instanceof BlockDynamicLeavesGolden)) {
-                if (!world.isRemote) world.setBlockState(pos, ModContent.goldenLeaves.getDefaultState()
-                        .withProperty(DECAYABLE, state.getPropertyKeys().contains(DECAYABLE) ? state.getValue(DECAYABLE) : false)
-                        .withProperty(HYDRO, state.getValue(HYDRO)));
-                return true;
+                final Species commonSpecies = SpeciesUtils.getSpeciesFromLeaveState(state);
+                if (commonSpecies != Species.NULLSPECIES) {
+                    if (!world.isRemote)
+                        world.setBlockState(pos, ModContent.goldenLeavesVariants.get(commonSpecies).getDefaultState()
+                                .withProperty(DECAYABLE, state.getPropertyKeys().contains(DECAYABLE) ? state.getValue(DECAYABLE) : false)
+                                .withProperty(HYDRO, state.getValue(HYDRO)));
+                    return true;
+                }
             }
         }
         return false;
