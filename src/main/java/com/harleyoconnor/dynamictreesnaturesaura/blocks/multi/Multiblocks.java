@@ -7,12 +7,15 @@ import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import de.ellpeck.naturesaura.api.multiblock.IMultiblock;
 import de.ellpeck.naturesaura.api.multiblock.Matcher;
 import de.ellpeck.naturesaura.blocks.ModBlocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.HashMap;
+
 public final class Multiblocks {
 
-    public static final IMultiblock DYNAMIC_TREE_RITUAL = NaturesAuraAPI.instance().createMultiblock(
+    public static final IMultiblock TREE_RITUAL_DYNAMIC = NaturesAuraAPI.instance().createMultiblock(
             new ResourceLocation(DynamicTreesNaturesAura.MODID, "tree_ritual_dynamic"),
             new String[][]{
                     {"    W    ", " W     W ", "   GGG   ", "  GG GG  ", "W G 0 G W", "  GG GG  ", "   GGG   ", " W     W ", "    W    "}},

@@ -6,9 +6,9 @@
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "https://www.curseforge.com/minecraft/mc-mods/dynamic-trees-natures-aura",
-  "updateUrl": "http://harleyoconnor.com/mods/minecraft/dynamic-trees-natures-aura/version-info.json",
-  "authorList": ["Harley O'Connor, Max Hyper"],
-  "credits": "Ferreusveritas for Dynamic Trees",
+  "updateUrl": "https://github.com/Harleyoc1/DynamicTreesVersionInfo/blob/master/Add-ons/NaturesAura.json?raw=true",
+  "authorList": ["Harley O'Connor"],
+  "credits": "Ferreusveritas for Dynamic Trees, Max Hyper for helping make this mod.",
   "logoFile": "dtna-logo.png",
   "screenshots": [],
   "dependencies": []
