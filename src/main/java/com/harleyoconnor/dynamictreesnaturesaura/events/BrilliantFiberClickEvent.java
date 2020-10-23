@@ -1,12 +1,8 @@
 package com.harleyoconnor.dynamictreesnaturesaura.events;
 
-import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
-import com.ferreusveritas.dynamictrees.trees.TreeOak;
-import com.harleyoconnor.dynamictreesnaturesaura.ModConfig;
 import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesGolden;
 import de.ellpeck.naturesaura.items.ModItems;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;

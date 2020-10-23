@@ -1,9 +1,7 @@
 package com.harleyoconnor.dynamictreesnaturesaura.effects;
 
-import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import com.ferreusveritas.dynamictrees.trees.Species;
-import com.ferreusveritas.dynamictrees.trees.TreeFamilyVanilla;
 import com.harleyoconnor.dynamictreesnaturesaura.ModContent;
 import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesDecayed;
 import com.harleyoconnor.dynamictreesnaturesaura.util.SpeciesUtils;
@@ -13,9 +11,7 @@ import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import de.ellpeck.naturesaura.api.aura.chunk.IAuraChunk;
 import de.ellpeck.naturesaura.api.aura.chunk.IDrainSpotEffect;
 import de.ellpeck.naturesaura.api.aura.type.IAuraType;
-import de.ellpeck.naturesaura.blocks.BlockDecayedLeaves;
 import de.ellpeck.naturesaura.blocks.ModBlocks;
-import de.ellpeck.naturesaura.items.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,15 +19,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
-import java.util.List;
-import java.util.Random;
-
 import static com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves.HYDRO;
-import static com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesGolden.HIGHEST_STAGE;
 
 public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
 
