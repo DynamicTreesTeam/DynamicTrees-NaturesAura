@@ -1,0 +1,26 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+    	"model": "leaves",
+		"textures": { "all": "naturesaura:blocks/decayed_leaves" }
+	},
+	"variants": {
+		"tree": {
+			"0": {},
+			"1": {},
+			"2": {},
+			"3": {}
+		},
+		"hydro": {
+			"1": {},
+			"2": {},
+			"3": {},
+			"4": {}
+		},
+		"decayable": {
+			"true": {},
+			"false": {}
+		}
+	}
+}

@@ -1,7 +1,9 @@
 # Blocks
 tile.leaves_ancient.name=Ancient Leaves
-tile.dynamictreesnaturesaura:ancientbranch.name=Dynamic Ancient Tree
-tile.dynamictreesnaturesaura:ancientroot.name=Dynamic Ancient Root
+tile.leaves_golden.name=Golden Leaves
+tile.leaves_decayed.name=Decayed Leaves
+tile.dynamictreesnaturesaura:ancientbranch.name=Ancient Tree
+tile.dynamictreesnaturesaura:ancientroot.name=Ancient Root
 
 # Items
 item.dynamictreesnaturesaura:ancientseed.name=Ancient Acorn

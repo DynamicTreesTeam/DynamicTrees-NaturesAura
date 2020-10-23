@@ -23,15 +23,19 @@ public class TreeAncient extends TreeFamily {
 
     public class SpeciesAncient extends Species {
 
+        // Set roots to grow at a trunk radius of 6, as roots are abundant on the ancient tree and should start growing early on.
         private final int minTrunkRadiusForRoots = 6;
 
         public SpeciesAncient(TreeFamily treeFamily) {
             super(treeFamily.getName(), treeFamily, ModContent.ancientLeavesProperties);
 
-            setBasicGrowingParameters(0.6f, 24.0f, 3, 4, 0.8f);
+            this.setBasicGrowingParameters(0.6f, 24.0f, 3, 4, 0.8f);
 
-            setupStandardSeedDropping();
-            generateSeed();
+            // Setup seed.
+            this.setupStandardSeedDropping();
+            this.generateSeed();
+
+            // Add roots generation.
             addGenFeature(new FeatureGenRoots(this.minTrunkRadiusForRoots).setScaler(getRootScaler()));
         }
 

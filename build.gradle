@@ -7,13 +7,28 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
+
+/*repositories {
+    maven {
+        name 'LDTTeam - Modding'
+        url 'https://ldtteam.jfrog.io/ldtteam/modding/'
+    }
+}*/
+
 apply plugin: 'net.minecraftforge.gradle.forge'
+
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
+ext.configFile = file "gradle.properties"
+configFile.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
 
-version = "1.12.2-1.0.1"
-group = "com.harleyoconnor.dynamictreesnaturesaura" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "dynamictreesnaturesaura"
+version = "${config.mc_version}-${config.mod_version}"
+group = config.package_group
+archivesBaseName = config.mod_name
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {
@@ -21,27 +36,19 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.2-14.23.5.2838"
+    version = "${config.mc_version}-${config.forge_version}"
     runDir = "run"
     
-    // the mappings can be changed at any time, and must be in the following format.
-    // snapshot_YYYYMMDD   snapshot are built nightly.
-    // stable_#            stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not always work.
-    // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20171003"
-    //makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+    if (config.mappings_version)
+        mappings = config.mappings_version
 }
 
 dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-
-    compile files('libs/DynamicTrees-1.12.2-0.9.8.jar')
+    compile files('libs/DynamicTrees-1.12.2-0.9.10.jar')
     compile files('libs/NaturesAura-18.1.jar')
-      
+
+    // compile 'mcp.mobius.waila:Hwyla:1.8.26-B41_1.12.2'
+
     // real examples
     //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
     //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
