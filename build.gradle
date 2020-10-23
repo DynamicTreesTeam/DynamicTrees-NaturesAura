@@ -44,7 +44,7 @@ minecraft {
 }
 
 dependencies {
-    compile files('libs/DynamicTrees-1.12.2-0.9.10.jar')
+    compile files('libs/DynamicTrees-1.12.2-0.9.18.jar')
     compile files('libs/NaturesAura-18.1.jar')
 
     // compile 'mcp.mobius.waila:Hwyla:1.8.26-B41_1.12.2'

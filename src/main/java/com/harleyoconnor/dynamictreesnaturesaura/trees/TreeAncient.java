@@ -79,11 +79,6 @@ public class TreeAncient extends TreeFamily {
     }
 
     @Override
-    public boolean autoCreateBranch() {
-        return true;
-    }
-
-    @Override
     public BlockSurfaceRoot getSurfaceRoots() {
         return ModContent.ancientRoot;
     }
