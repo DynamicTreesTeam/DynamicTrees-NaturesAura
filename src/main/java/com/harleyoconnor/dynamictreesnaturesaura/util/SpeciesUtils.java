@@ -4,11 +4,8 @@ import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import com.ferreusveritas.dynamictrees.trees.Species;
-import com.harleyoconnor.dynamictreesnaturesaura.DynamicTreesNaturesAura;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.ResourceBundle;
 
 /**
  * @author Harley O'Connor

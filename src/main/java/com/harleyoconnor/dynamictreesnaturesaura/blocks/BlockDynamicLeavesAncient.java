@@ -28,7 +28,6 @@ import java.util.Random;
 public class BlockDynamicLeavesAncient extends BlockDynamicLeaves implements IModItem, ITileEntityProvider {
 
     public BlockDynamicLeavesAncient() {
-        super();
         setRegistryName(DynamicTreesNaturesAura.MODID, "leaves_ancient");
         setUnlocalizedName("leaves_ancient");
     }
