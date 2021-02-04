@@ -10,7 +10,7 @@ buildscript {
 
 repositories {
     maven {
-        url = "https://maven.ellpeck.de"
+        url "https://www.cursemaven.com"
     }
 }
 
