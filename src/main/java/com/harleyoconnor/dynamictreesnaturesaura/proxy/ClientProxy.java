@@ -4,6 +4,7 @@ import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import com.harleyoconnor.dynamictreesnaturesaura.ModContent;
 import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesAncient;
+import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesDecayed;
 import com.harleyoconnor.dynamictreesnaturesaura.blocks.BlockDynamicLeavesGolden;
 import de.ellpeck.naturesaura.Helper;
 import net.minecraft.world.biome.BiomeColorHelper;
@@ -40,7 +41,7 @@ public class ClientProxy extends CommonProxy {
 					} else {
 						return color;
 					}
-				}
+				} else if (state.getBlock() instanceof BlockDynamicLeavesDecayed) return 0xFFFFFF;
 
 				return 0x000000;
 			});

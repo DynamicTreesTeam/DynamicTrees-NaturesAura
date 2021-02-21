@@ -25,6 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
+@SuppressWarnings("deprecation")
 public class BlockDynamicLeavesAncient extends BlockDynamicLeaves implements IModItem, ITileEntityProvider {
 
     public BlockDynamicLeavesAncient() {

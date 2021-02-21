@@ -11,7 +11,6 @@ import com.harleyoconnor.dynamictreesnaturesaura.util.SpeciesUtils;
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import de.ellpeck.naturesaura.items.ModItems;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -27,14 +26,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings("deprecation")
 public class BlockDynamicLeavesGolden extends BlockDynamicLeaves {
 
     public static final int HIGHEST_STAGE = 3;
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, HIGHEST_STAGE);
 
     public BlockDynamicLeavesGolden(String speciesName) {
-        setRegistryName(DynamicTreesNaturesAura.MODID, "leaves_golden_" + speciesName);
-        setUnlocalizedName("leaves_golden");
+        this.setRegistryName(DynamicTreesNaturesAura.MODID, "leaves_golden_" + speciesName);
+        this.setUnlocalizedName("leaves_golden");
     }
 
     @Override
@@ -68,7 +68,7 @@ public class BlockDynamicLeavesGolden extends BlockDynamicLeaves {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {HYDRO, TREE, DECAYABLE, STAGE});
+        return new BlockStateContainer(this, HYDRO, TREE, DECAYABLE, STAGE);
     }
 
     @Override
@@ -117,9 +117,9 @@ public class BlockDynamicLeavesGolden extends BlockDynamicLeaves {
                 final Species commonSpecies = SpeciesUtils.getSpeciesFromLeaveState(state);
                 if (commonSpecies != Species.NULLSPECIES) {
                     if (!world.isRemote)
-                        world.setBlockState(pos, ModContent.goldenLeavesVariants.get(commonSpecies).getDefaultState()
+                        world.setBlockState(pos, ModContent.goldenLeavesVariants.get(commonSpecies.getFamily()).getDynamicLeavesState()
                                 .withProperty(DECAYABLE, state.getPropertyKeys().contains(DECAYABLE) ? state.getValue(DECAYABLE) : false)
-                                .withProperty(HYDRO, state.getValue(HYDRO)));
+                                .withProperty(HYDRO, state.getValue(HYDRO)).withProperty(STAGE, 0));
                     return true;
                 }
             }

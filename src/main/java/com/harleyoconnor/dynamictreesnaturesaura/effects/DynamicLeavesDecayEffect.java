@@ -77,7 +77,7 @@ public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
                 if (!(block instanceof BlockDynamicLeavesDecayed) && block instanceof BlockDynamicLeaves) {
                     final Species commonSpeices = SpeciesUtils.getSpeciesFromLeaveState(state);
                     if (commonSpeices != Species.NULLSPECIES)
-                        newState = ModContent.decayedLeavesVariants.get(commonSpeices).getDefaultState().withProperty(HYDRO, state.getValue(HYDRO));
+                        newState = ModContent.decayedLeavesVariants.get(commonSpeices).getDynamicLeavesState().withProperty(HYDRO, state.getValue(HYDRO));
                 }
 
                 if (newState != null)

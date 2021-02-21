@@ -3,8 +3,14 @@ package com.harleyoconnor.dynamictreesnaturesaura.util;
 import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
+import com.ferreusveritas.dynamictrees.blocks.BlockDynamicSapling;
 import com.ferreusveritas.dynamictrees.trees.Species;
+import com.ferreusveritas.dynamictrees.trees.TreeBirch;
+import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import com.ferreusveritas.dynamictrees.trees.TreeOak;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -39,6 +45,12 @@ public final class SpeciesUtils {
         }
 
         return Species.NULLSPECIES;
+    }
+
+    public static ItemStack getVanillaSapling (final BlockDynamicSapling dynamicSapling, final TreeFamily family) {
+        Item item = Item.getByNameOrId(family.getName().getResourcePath() + "_sapling");
+        if (item == null) return ItemStack.EMPTY;
+        return new ItemStack(item);
     }
 
     public static Species findVanillaSpecies (final String speciesName) {

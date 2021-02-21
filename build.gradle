@@ -10,7 +10,13 @@ buildscript {
 
 repositories {
     maven {
+        url "http://harleyoconnor.com/maven"
+    }
+    maven {
         url "https://www.cursemaven.com"
+    }
+    maven {
+        url = "https://maven.chaosfield.at"
     }
 }
 
@@ -41,11 +47,11 @@ minecraft {
 }
 
 dependencies {
-    // Compile Dynamic Trees from Curse Maven.
-    compile "curse.maven:DynamicTrees-252818:3105281"
+    // Compile Dynamic Trees from my maven.
+    compile "com.ferreusveritas.dynamictrees:DynamicTrees-1.12.2:0.9.23-B5"
 
-    // Compile Nature's Aura from Curse Maven.
-    compile "curse.maven:NaturesAura-306626:2882138"
+    // Compile Nature's Aura from maven.
+    compile "de.ellpeck.naturesaura:NaturesAura:r14-209"
 }
 
 processResources {
