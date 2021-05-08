@@ -1,0 +1,38 @@
+license="MIT"
+modLoader="javafml"
+loaderVersion="[35,)"
+issueTrackerURL="https://github.com/Harleyoc1/DynamicTreesNaturesAura/issues"
+
+[[mods]]
+modId="dtnaturesaura"
+version="${file.jarVersion}"
+displayName="Dynamic Trees Plus"
+updateJSONURL="https://github.com/Harleyoc1/DynamicTreesNaturesAura/blob/1.16.5/version_info.json?raw=true"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/dynamic-trees-natures-aura"
+logoFile="dtna-logo.png"
+credits=""
+authors="Harley O'Connor"
+description='''
+Adds Dynamic Trees compatibility to Nature's Aura.
+'''
+
+[[dependencies.dtnaturesaura]]
+    modId="forge"
+    mandatory=true
+    versionRange="[35,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.dtnaturesaura]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.4,1.16.5]"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.dtnaturesaura]]
+    modId="dynamictrees"
+    mandatory=true
+    versionRange="[0.10.0,)"
+    ordering="AFTER"
+    side="BOTH"

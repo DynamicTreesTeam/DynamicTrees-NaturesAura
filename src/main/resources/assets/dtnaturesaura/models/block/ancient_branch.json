@@ -1,0 +1,7 @@
+{
+  "loader": "dynamictrees:thick_branch",
+  "textures": {
+    "bark": "naturesaura:block/ancient_log",
+    "rings": "naturesaura:block/ancient_log_top"
+  }
+}

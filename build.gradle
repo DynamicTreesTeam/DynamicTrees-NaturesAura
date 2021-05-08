@@ -1,20 +1,38 @@
+import org.w3c.dom.Element
+
 buildscript {
     repositories {
-        jcenter()
-        maven { url = "https://files.minecraftforge.net/maven" }
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
     }
 }
 
 repositories {
     maven {
+        name 'LDTTeam - Modding'
+        url 'https://ldtteam.jfrog.io/ldtteam/modding/'
+    }
+    maven {
+        url "https://maven.tehnut.info"
+    }
+    maven {
         url "https://www.cursemaven.com"
+    }
+    maven {
+        url "http://harleyoconnor.com/maven"
+    }
+    maven {
+        url "https://maven.ellpeck.de"
     }
 }
 
-apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'maven-publish'
 
 ext.configFile = file "gradle.properties"
 configFile.withReader {
@@ -27,38 +45,136 @@ version = "${config.mc_version}-${config.mod_version}"
 group = config.package_group
 archivesBaseName = config.mod_name
 
-sourceCompatibility = targetCompatibility = '1.8'
-compileJava {
-    sourceCompatibility = targetCompatibility = '1.8'
-}
+java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
 minecraft {
-    version = "${config.mc_version}-${config.forge_version}"
-    runDir = "run"
-    
-    if (config.mappings_version)
-        mappings = config.mappings_version
+    mappings channel: 'snapshot', version: "20200723-1.16.1"
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+
+            properties 'mixin.env.disableRefMap' : 'true'
+
+            mods {
+                dtnaturesaura {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                dtnaturesaura {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
 }
 
 dependencies {
-    // Compile Dynamic Trees from Curse Maven.
-    compile "curse.maven:DynamicTrees-252818:3105281"
+    // Not sure if we need this one, what is a "forge" anyway?
+    minecraft "net.minecraftforge:forge:${config.mc_version}-${config.forge_version}"
 
-    // Compile Nature's Aura from Curse Maven.
-    compile "curse.maven:NaturesAura-306626:2882138"
+    // Compile Hwyla API, but don't include in runtime.
+    compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${config.hwyla_version}:api")
+    // At runtime, use the full Hwyla mod.
+    runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${config.hwyla_version}")
+
+    // Compile JEI API, but don't include in runtime.
+    compileOnly fg.deobf("mezz.jei:jei-1.16.4:${config.jei_version}:api")
+    // At runtime, use the full JEI mod.
+    runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:${config.jei_version}")
+
+    // Compile Dynamic Trees, of course.
+    implementation fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-${config.mc_version}:${config.dynamic_trees_version}")
+
+    implementation fg.deobf("de.ellpeck.naturesaura:NaturesAura:${config.natures_aura_version}")
+
+    // Natures Aura requires Patchouli.
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${config.patchouli_version}")
+
+    // At runtime, use suggestion provider fix mod.
+    runtimeOnly fg.deobf("com.harleyoconnor.suggestionproviderfix:SuggestionProviderFix:${config.mc_version}-${config.suggestion_provider_fix_version}")
 }
 
-processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+jar {
+    manifest {
+        attributes([
+                "Specification-Title": project.name,
+                "Specification-Vendor": "Harley O'Connor",
+                "Specification-Version": "1",
+                "Implementation-Title": project.name,
+                "Implementation-Version": version,
+                "Implementation-Vendor" : "Harley O'Connor",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
     }
-        
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier.set("sources")
+    from sourceSets.main.allJava
+}
+
+jar.finalizedBy('reobfJar')
+
+java {
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            setArtifactId("${config.mod_name}-${config.mc_version}")
+            setVersion(config.mod_version)
+
+            from components.java
+
+            pom {
+                url = "https://github.com/Harleyoc1/${config.mod_name}"
+                licenses {
+                    license {
+                        name = 'MIT'
+                        url = 'https://mit-license.org'
+                    }
+                }
+                scm {
+                    connection = "scm:git:git://github.com/Harleyoc1/${config.mod_name}.git"
+                    developerConnection = "scm:git:ssh://github.com/Harleyoc1/${config.mod_name}.git"
+                    url = "https://github.com/Harleyoc1/${config.mod_name}"
+                }
+            }
+
+            pom.withXml { xmlProvider ->
+                final Element element = xmlProvider.asElement();
+
+                // Clear dependencies.
+                element.getChildNodes().each { node ->
+                    if (node.getNodeName() == "dependencies")
+                        element.removeChild(node)
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+idea {
+    module {
+        downloadSources = true
     }
 }

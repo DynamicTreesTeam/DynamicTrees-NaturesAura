@@ -1,7 +1,0 @@
-{
-  "parent": "dynamictrees:block/smartmodel/branch",
-  "textures": {
-    "bark": "naturesaura:blocks/ancient_log",
-    "rings": "naturesaura:blocks/ancient_log_top"
-  }
-}

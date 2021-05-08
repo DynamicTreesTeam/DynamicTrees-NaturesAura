@@ -1,0 +1,9 @@
+{
+  "common_leaves": "dtnaturesaura:ancient",
+  "common_species": "dtnaturesaura:ancient",
+  "primitive_log": "naturesaura:ancient_log",
+  "stick": "stick",
+  "max_branch_radius": 24,
+  "generate_surface_root": true,
+  "has_stripped_branch": false
+}

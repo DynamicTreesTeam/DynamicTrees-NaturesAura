@@ -1,9 +1,0 @@
-# Species
-species.dynamictreesnaturesaura:ancient.name=Ancient
-
-# Blocks
-tile.dynamictreesnaturesaura:ancientbranch.name=Ancient Tree
-tile.dynamictreesnaturesaura:ancientroot.name=Ancient Root
-
-# Items
-item.dynamictreesnaturesaura:ancientseed.name=Ancient Acorn
