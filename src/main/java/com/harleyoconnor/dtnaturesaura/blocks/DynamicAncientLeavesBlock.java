@@ -5,9 +5,6 @@ import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import de.ellpeck.naturesaura.blocks.ModBlocks;
 import de.ellpeck.naturesaura.blocks.tiles.TileEntityAncientLeaves;
-import de.ellpeck.naturesaura.data.BlockStateGenerator;
-import de.ellpeck.naturesaura.reg.ICustomBlockState;
-import de.ellpeck.naturesaura.reg.IModItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -17,21 +14,14 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
-public class DynamicAncientLeavesBlock extends DynamicLeavesBlock implements IModItem, ICustomBlockState {
+public final class DynamicAncientLeavesBlock extends DynamicLeavesBlock {
 
     public DynamicAncientLeavesBlock(LeavesProperties leavesProperties, Properties properties) {
         super(leavesProperties, properties);
     }
 
-    @Override
-    public String getBaseName() {
-        return "ancient_leaves";
-    }
-
-    @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return new TileEntityAncientLeaves();
@@ -41,18 +31,6 @@ public class DynamicAncientLeavesBlock extends DynamicLeavesBlock implements IMo
     public boolean hasTileEntity(BlockState state) {
         return true;
     }
-
-//    @Override
-//    @OnlyIn(Dist.CLIENT)
-//    public IBlockColor getBlockColor() {
-//        return (state, worldIn, pos, tintIndex) -> 0xE55B97;
-//    }
-//
-//    @Override
-//    @OnlyIn(Dist.CLIENT)
-//    public IItemColor getItemColor() {
-//        return (stack, tintIndex) -> 0xE55B97;
-//    }
 
     @Override
     @OnlyIn(Dist.CLIENT)
@@ -85,16 +63,6 @@ public class DynamicAncientLeavesBlock extends DynamicLeavesBlock implements IMo
                 }
             }
         }
-    }
-
-//    @Override
-//    public boolean ticksRandomly(BlockState state) {
-//        return true;
-//    }
-
-    @Override
-    public void generateCustomBlockState(BlockStateGenerator generator) {
-        generator.simpleBlock(this, generator.models().getExistingFile(generator.modLoc(this.getBaseName())));
     }
 
 }

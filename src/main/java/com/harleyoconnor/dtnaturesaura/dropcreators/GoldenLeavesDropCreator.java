@@ -3,7 +3,9 @@ package com.harleyoconnor.dtnaturesaura.dropcreators;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.harleyoconnor.dtnaturesaura.DTNaturesAura;
+import com.harleyoconnor.dtnaturesaura.blocks.DynamicGoldenLeavesBlock;
 import de.ellpeck.naturesaura.items.ModItems;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -12,13 +14,12 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Random;
 
-public class DropCreatorGoldenLeaves extends DropCreator {
+import static de.ellpeck.naturesaura.blocks.BlockGoldenLeaves.HIGHEST_STAGE;
 
-//    private final boolean requiresOak;
+public class GoldenLeavesDropCreator extends DropCreator {
 
-    public DropCreatorGoldenLeaves() {
-        super(new ResourceLocation(DTNaturesAura.MOD_ID, ModItems.GOLD_LEAF.getRegistryName().getNamespace()));
-//        this.requiresOak = ModConfig.GOLD_LEAF_NEEDS_OAK;
+    public GoldenLeavesDropCreator() {
+        super(DTNaturesAura.resLoc("golden_leaves"));
     }
 
     @Override
@@ -32,13 +33,19 @@ public class DropCreatorGoldenLeaves extends DropCreator {
     }
 
     private List<ItemStack> getDrops (World world, Species species, BlockPos leafPos, Random random, List<ItemStack> dropList, int fortune) {
-//        if (!(world.getBlockState(leafPos).getBlock() instanceof BlockDynamicLeavesGolden))
-//            return dropList;
-//
-//        if (!(species instanceof TreeOak.SpeciesOak || species instanceof TreeOak.SpeciesAppleOak || species instanceof TreeOak.SpeciesSwampOak) && this.requiresOak)
-//            return dropList;
+        if (!(world.getBlockState(leafPos).getBlock() instanceof DynamicGoldenLeavesBlock))
+            return dropList;
 
-//        BlockDynamicLeavesGolden.addDrops(dropList, world, leafPos, world.getBlockState(leafPos), fortune);
+        final Random rand = world.rand;
+        final BlockState state = world.getBlockState(leafPos);
+
+        if (state.get(DynamicGoldenLeavesBlock.STAGE) < HIGHEST_STAGE) {
+            if (rand.nextFloat() >= 0.75F) {
+                dropList.add(new ItemStack(ModItems.GOLD_FIBER));
+            }
+        } else if (rand.nextFloat() >= 0.25F) {
+            dropList.add(new ItemStack(ModItems.GOLD_LEAF));
+        }
 
         return dropList;
     }

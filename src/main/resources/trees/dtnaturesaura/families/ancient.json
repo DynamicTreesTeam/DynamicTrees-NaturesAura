@@ -5,5 +5,5 @@
   "stick": "stick",
   "max_branch_radius": 24,
   "generate_surface_root": true,
-  "has_stripped_branch": false
+  "generate_stripped_branch": false
 }

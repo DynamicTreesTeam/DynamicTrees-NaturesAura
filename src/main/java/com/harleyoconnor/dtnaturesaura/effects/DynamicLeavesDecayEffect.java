@@ -1,7 +1,7 @@
 package com.harleyoconnor.dtnaturesaura.effects;
 
-import com.ferreusveritas.dynamictrees.blocks.leaves.DynamicLeavesBlock;
-import com.harleyoconnor.dtnaturesaura.blocks.BlockDynamicLeavesDecayed;
+import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
+import com.harleyoconnor.dtnaturesaura.DTNaturesAura;
 import de.ellpeck.naturesaura.ModConfig;
 import de.ellpeck.naturesaura.NaturesAura;
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
@@ -11,6 +11,7 @@ import de.ellpeck.naturesaura.api.aura.type.IAuraType;
 import de.ellpeck.naturesaura.blocks.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -55,6 +56,7 @@ public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void update(World world, Chunk chunk, IAuraChunk auraChunk, BlockPos pos, Integer spot) {
         if (!this.calcValues(world, pos, spot))
             return;
@@ -69,12 +71,12 @@ public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
                 Block block = state.getBlock();
 
                 BlockState newState = null;
-                if (!(block instanceof BlockDynamicLeavesDecayed) && block instanceof DynamicLeavesBlock) {
-//                    final Species commonSpeices = SpeciesUtils.getSpeciesFromLeaveState(state);
-//                    if (!commonSpeices.isValid())
-//                        newState = ModContent.decayedLeavesVariants.get(commonSpeices).getDefaultState().withProperty(HYDRO, state.getValue(HYDRO));
+                if (block instanceof LeavesBlock) {
+                    newState = LeavesProperties.REGISTRY.get(DTNaturesAura.resLoc("decayed_leaves"))
+                            .getDynamicLeavesBlock()
+                            .map(Block::getDefaultState)
+                            .orElse(newState);
                 }
-
                 if (newState != null)
                     world.setBlockState(grassPos, newState);
             }
@@ -83,7 +85,7 @@ public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
 
     @Override
     public boolean appliesHere(Chunk chunk, IAuraChunk auraChunk, IAuraType type) {
-        return ModConfig.instance.grassDieEffect.get() && type.isSimilar(NaturesAuraAPI.TYPE_OVERWORLD);
+        return ModConfig.instance.grassDieEffect.get() && (type.isSimilar(NaturesAuraAPI.TYPE_OVERWORLD) || type.isSimilar(NaturesAuraAPI.TYPE_NETHER));
     }
 
     @Override
