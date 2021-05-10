@@ -1,6 +1,10 @@
 package com.harleyoconnor.dtnaturesaura.effects;
 
+import com.ferreusveritas.dynamictrees.api.TreeHelper;
+import com.ferreusveritas.dynamictrees.blocks.leaves.DynamicLeavesBlock;
 import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
+import com.ferreusveritas.dynamictrees.blocks.leaves.SolidLeavesProperties;
+import com.harleyoconnor.dtnaturesaura.AddonConfig;
 import com.harleyoconnor.dtnaturesaura.DTNaturesAura;
 import de.ellpeck.naturesaura.ModConfig;
 import de.ellpeck.naturesaura.NaturesAura;
@@ -11,7 +15,6 @@ import de.ellpeck.naturesaura.api.aura.type.IAuraType;
 import de.ellpeck.naturesaura.blocks.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -22,7 +25,7 @@ import net.minecraft.world.chunk.Chunk;
 
 public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
 
-    public static final ResourceLocation NAME = new ResourceLocation(NaturesAura.MOD_ID, "dynamic_leave_decay");
+    public static final ResourceLocation NAME = new ResourceLocation(NaturesAura.MOD_ID, "dynamic_leaves_decay");
 
     private int amount;
     private int dist;
@@ -47,6 +50,7 @@ public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
             return ActiveType.INACTIVE;
         if (player.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > this.dist * this.dist)
             return ActiveType.INACTIVE;
+
         return ActiveType.ACTIVE;
     }
 
@@ -60,32 +64,50 @@ public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
     public void update(World world, Chunk chunk, IAuraChunk auraChunk, BlockPos pos, Integer spot) {
         if (!this.calcValues(world, pos, spot))
             return;
+
         for (int i = this.amount / 2 + world.rand.nextInt(this.amount / 2); i >= 0; i--) {
-            BlockPos grassPos = new BlockPos(
+            final BlockPos grassPos = new BlockPos(
                     pos.getX() + world.rand.nextGaussian() * this.dist,
                     pos.getY() + world.rand.nextGaussian() * this.dist,
                     pos.getZ() + world.rand.nextGaussian() * this.dist
             );
-            if (grassPos.distanceSq(pos) <= this.dist * this.dist && world.isBlockLoaded(grassPos)) {
-                BlockState state = world.getBlockState(grassPos);
-                Block block = state.getBlock();
 
-                BlockState newState = null;
-                if (block instanceof LeavesBlock) {
-                    newState = LeavesProperties.REGISTRY.get(DTNaturesAura.resLoc("decayed_leaves"))
-                            .getDynamicLeavesBlock()
-                            .map(Block::getDefaultState)
-                            .orElse(newState);
-                }
-                if (newState != null)
-                    world.setBlockState(grassPos, newState);
-            }
+            if (grassPos.distanceSq(pos) > this.dist * this.dist || !world.isBlockLoaded(grassPos))
+                continue;
+
+            final BlockState state = world.getBlockState(grassPos);
+            final Block block = state.getBlock();
+
+            final DynamicLeavesBlock leaves = TreeHelper.getLeaves(block);
+
+            if (leaves == null)
+                continue;
+
+            final LeavesProperties properties = leaves.getProperties(state);
+
+            // Solid leaves properties or any added to the leaves decay blacklist
+            // shouldn't be able to decay.
+            if (properties instanceof SolidLeavesProperties ||
+                    AddonConfig.LEAVES_DECAY_BLACKLIST.get().stream()
+                            .map(ResourceLocation::tryCreate)
+                            .anyMatch(properties.getRegistryName()::equals)
+            )
+                continue;
+
+            // Try to get the decayed leaves block and set it.
+            LeavesProperties.REGISTRY
+                    .get(DTNaturesAura.resLoc("decayed_leaves"))
+                    .getDynamicLeavesBlock()
+                    .map(Block::getDefaultState)
+                    .ifPresent(newState -> world.setBlockState(grassPos, newState));
         }
     }
 
     @Override
     public boolean appliesHere(Chunk chunk, IAuraChunk auraChunk, IAuraType type) {
-        return ModConfig.instance.grassDieEffect.get() && (type.isSimilar(NaturesAuraAPI.TYPE_OVERWORLD) || type.isSimilar(NaturesAuraAPI.TYPE_NETHER));
+        return ModConfig.instance.grassDieEffect.get() &&
+                (type.isSimilar(NaturesAuraAPI.TYPE_OVERWORLD) ||
+                        type.isSimilar(NaturesAuraAPI.TYPE_NETHER));
     }
 
     @Override
