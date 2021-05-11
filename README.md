@@ -10,6 +10,6 @@ Download at the [CurseForge page](https://www.curseforge.com/minecraft/mc-mods/d
 - Ancient Tree
 
 ## Translations
-🇫🇷 19PixelsPlaced<br>
-🇪🇸 Jorgegiral<br>
-🇲🇽 EdicionGamerYT
+- 🇫🇷 19PixelsPlaced
+- 🇪🇸 Jorgegiral
+- 🇲🇽 EdicionGamerYT
