@@ -9,3 +9,7 @@ Download at the [CurseForge page](https://www.curseforge.com/minecraft/mc-mods/d
 ## Supported Trees
 - Ancient Tree
 
+## Translations
+- 🇫🇷 19PixelsPlaced
+- 🇪🇸 Jorgegiral
+- 🇲🇽 EdicionGamerYT
