@@ -24,13 +24,22 @@ import java.util.Map;
 @Mod.EventBusSubscriber(modid = DTNaturesAura.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class AddonRegistries {
 
+    /** The {@link ResourceLocation} of ancient leaves properties (and their type). */
+    public static final ResourceLocation ANCIENT = DTNaturesAura.resLoc("ancient");
+
+    /** The {@link ResourceLocation} of golden leaves properties type. */
+    public static final ResourceLocation GOLDEN = DTNaturesAura.resLoc("golden");
+
+    /** The {@link ResourceLocation} of decayed leaves properties (and their type). */
+    public static final ResourceLocation DECAYED = DTNaturesAura.resLoc("decayed");
+
     public static final Map<Family, LeavesProperties> FAMILY_GOLDEN_LEAVES_MAP = Maps.newHashMap();
 
     @SubscribeEvent
     public static void registerLeavesPropertyTypes(final TypeRegistryEvent<LeavesProperties> event) {
-        event.registerType(DTNaturesAura.resLoc("ancient"), AncientLeavesProperties.TYPE);
-        event.registerType(DTNaturesAura.resLoc("golden"), GoldenLeavesProperties.TYPE);
-        event.registerType(DTNaturesAura.resLoc("decayed"), DecayedLeavesProperties.TYPE);
+        event.registerType(ANCIENT, AncientLeavesProperties.TYPE);
+        event.registerType(GOLDEN, GoldenLeavesProperties.TYPE);
+        event.registerType(DECAYED, DecayedLeavesProperties.TYPE);
     }
 
     public static final DropCreator GOLDEN_LEAVES_DROP_CREATOR = new GoldenLeavesDropCreator();

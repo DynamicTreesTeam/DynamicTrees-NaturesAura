@@ -10,6 +10,10 @@ Download at the [CurseForge page](https://www.curseforge.com/minecraft/mc-mods/d
 - Ancient Tree
 
 ## Translations
+Thank you to the following people who spent their time making translations for the corresponding languages. 
+
+If you speak another language and would like to help, please [join the Dynamic Trees Discord](https://discord.gg/bGby2qxvqu).
+
 - 🇫🇷 19PixelsPlaced
 - 🇪🇸 Jorgegiral
 - 🇲🇽 EdicionGamerYT

@@ -4,6 +4,7 @@ import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.harleyoconnor.dtnaturesaura.effects.DynamicLeavesDecayEffect;
+import com.harleyoconnor.dtnaturesaura.effects.GrassDieEffect;
 import com.harleyoconnor.dtnaturesaura.events.BrilliantFiberClickEventHandler;
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import net.minecraft.util.ResourceLocation;
@@ -31,11 +32,14 @@ public class DTNaturesAura {
 		// Register brilliant fiber click event for dynamic leaves.
 		MinecraftForge.EVENT_BUS.register(new BrilliantFiberClickEventHandler());
 
+		// Overwrite grass die effect so that it doesn't convert dynamic leaves.
+		NaturesAuraAPI.DRAIN_SPOT_EFFECTS.put(GrassDieEffect.NAME, GrassDieEffect::new);
+
 		// Add drain spot effect for decaying dynamic leaves.
 		NaturesAuraAPI.DRAIN_SPOT_EFFECTS.put(DynamicLeavesDecayEffect.NAME, DynamicLeavesDecayEffect::new);
 
 		// Register decayed leaves properties as valid leaves for any tree.
-		final LeavesProperties decayedProperties = LeavesProperties.REGISTRY.get(resLoc("decayed"));
+		final LeavesProperties decayedProperties = LeavesProperties.REGISTRY.get(AddonRegistries.DECAYED);
 		Species.REGISTRY.getAll().forEach(species -> species.addValidLeafBlocks(decayedProperties));
 	}
 
