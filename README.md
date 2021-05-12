@@ -12,7 +12,7 @@ Dynamic Trees for Nature's Aura
         <img src="http://cf.way2muchnoise.eu/title/dynamictrees_Requires_%20.svg"  alt="RequiresDT"/>
     </a>
 </p>
-
+<br>
 Dynamic Trees compatibility add-on for Nature’s Aura.
 
 ## Download
