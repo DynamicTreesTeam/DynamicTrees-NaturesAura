@@ -1,9 +1,9 @@
 ![Logo](./dtna-banner.png)
 
-<h1 style="text-align: center">
+<h1 align="center">
 Dynamic Trees for Nature's Aura
 </h1>
-<p style="text-align: center">
+<p align="center">
     <a href="https://www.curseforge.com/minecraft/mc-mods/dynamic-trees-natures-aura">
         <img src="http://cf.way2muchnoise.eu/dynamic-trees-natures-aura.svg"  alt="Downloads"/>
         <img src="http://cf.way2muchnoise.eu/versions/dynamic-trees-natures-aura.svg"  alt="Versions"/>
