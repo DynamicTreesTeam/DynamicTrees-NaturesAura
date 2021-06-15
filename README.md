@@ -28,11 +28,7 @@ Download at the [CurseForge page](https://www.curseforge.com/minecraft/mc-mods/d
 ## Future Features
 My ideas checklist for future features is [here](https://github.com/Harleyoc1/DynamicTreesNaturesAura/issues/8). Fell free to open a new issue if you have any other suggestions that <b>are not</b> on this list. 
 
-## Translations
-Thank you to the following people who spent their time making translations for the corresponding languages. 
+## Translations 🇫🇷 🇪🇸 🇲🇽
+Thank you to the people found [here](https://github.com/ferreusveritas/DynamicTrees/wiki/Translation-Credits) who spend their time creating and maintaining translations for this and other DT add-ons.
 
 If you speak another language and would like to help, please [join the Dynamic Trees Discord](https://discord.gg/bGby2qxvqu).
-
-- 🇫🇷 19PixelsPlaced
-- 🇪🇸 Jorgegiral
-- 🇲🇽 EdicionGamerYT
