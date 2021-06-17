@@ -1,5 +1,6 @@
 package com.harleyoconnor.dtnaturesaura;
 
+import com.ferreusveritas.dynamictrees.DynamicTrees;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
 import com.ferreusveritas.dynamictrees.trees.Species;
@@ -13,6 +14,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(DTNaturesAura.MOD_ID)
@@ -22,6 +24,7 @@ public class DTNaturesAura {
 
 	public DTNaturesAura() {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData);
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, AddonConfig.COMMON_CONFIG);
 
@@ -41,6 +44,10 @@ public class DTNaturesAura {
 		// Register decayed leaves properties as valid leaves for any tree.
 		final LeavesProperties decayedProperties = LeavesProperties.REGISTRY.get(AddonRegistries.DECAYED);
 		Species.REGISTRY.getAll().forEach(species -> species.addValidLeafBlocks(decayedProperties));
+	}
+
+	public void gatherData(final GatherDataEvent event) {
+		DynamicTrees.gatherTagGenerators(MOD_ID, event);
 	}
 
 	public static ResourceLocation resLoc(final String path) {

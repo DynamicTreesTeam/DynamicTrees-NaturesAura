@@ -83,7 +83,29 @@ minecraft {
                 }
             }
         }
+
+        data {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+
+            args '--mod', 'dtnaturesaura', '--all', '--output', file('src/generated/resources/')
+
+            mods {
+                dtnaturesaura {
+                    source sourceSets.main
+                }
+            }
+        }
     }
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
 }
 
 dependencies {
@@ -103,7 +125,7 @@ dependencies {
     // Compile Dynamic Trees, of course.
     implementation fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-${config.mc_version}:${config.dynamic_trees_version}")
 
-    implementation fg.deobf("de.ellpeck.naturesaura:NaturesAura:${config.natures_aura_version}")
+    implementation fg.deobf("curse.maven:NaturesAura-306626:3255666")
 
     // Natures Aura requires Patchouli.
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${config.patchouli_version}")
