@@ -2,7 +2,7 @@ package com.harleyoconnor.dtnaturesaura.blocks;
 
 import com.ferreusveritas.dynamictrees.blocks.leaves.DynamicLeavesBlock;
 import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
-import com.ferreusveritas.dynamictrees.util.CommonBlockStates;
+import com.ferreusveritas.dynamictrees.util.BlockStates;
 import de.ellpeck.naturesaura.blocks.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,8 +31,8 @@ public class DynamicDecayedLeavesBlock extends DynamicLeavesBlock {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random rand) {
-        if (!world.isRemote) {
-            world.setBlockState(pos, CommonBlockStates.AIR);
+        if (!world.isClientSide) {
+            world.setBlockAndUpdate(pos, BlockStates.AIR);
         }
     }
 

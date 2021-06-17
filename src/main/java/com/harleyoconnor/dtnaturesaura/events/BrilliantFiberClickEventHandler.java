@@ -26,9 +26,9 @@ public final class BrilliantFiberClickEventHandler {
             return;
 
         event.setResult(Event.Result.ALLOW);
-        event.getPlayer().swingArm(event.getHand());
+        event.getPlayer().swing(event.getHand());
 
-        if (!event.getWorld().isRemote && !event.getPlayer().isCreative())
+        if (!event.getWorld().isClientSide && !event.getPlayer().isCreative())
             stack.shrink(1);
     }
 

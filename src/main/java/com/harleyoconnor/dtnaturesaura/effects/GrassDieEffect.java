@@ -46,9 +46,9 @@ public class GrassDieEffect implements IDrainSpotEffect {
 
     @Override
     public ActiveType isActiveHere(PlayerEntity player, Chunk chunk, IAuraChunk auraChunk, BlockPos pos, Integer spot) {
-        if (!this.calcValues(player.world, pos, spot))
+        if (!this.calcValues(player.level, pos, spot))
             return ActiveType.INACTIVE;
-        if (player.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > this.dist * this.dist)
+        if (player.distanceToSqr(pos.getX(), pos.getY(), pos.getZ()) > this.dist * this.dist)
             return ActiveType.INACTIVE;
         return ActiveType.ACTIVE;
     }
@@ -58,33 +58,34 @@ public class GrassDieEffect implements IDrainSpotEffect {
         return new ItemStack(ModBlocks.DECAYED_LEAVES);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void update(World world, Chunk chunk, IAuraChunk auraChunk, BlockPos pos, Integer spot) {
         if (!this.calcValues(world, pos, spot))
             return;
 
-        for (int i = this.amount / 2 + world.rand.nextInt(this.amount / 2); i >= 0; i--) {
+        for (int i = this.amount / 2 + world.random.nextInt(this.amount / 2); i >= 0; i--) {
             BlockPos grassPos = new BlockPos(
-                    pos.getX() + world.rand.nextGaussian() * this.dist,
-                    pos.getY() + world.rand.nextGaussian() * this.dist,
-                    pos.getZ() + world.rand.nextGaussian() * this.dist
+                    pos.getX() + world.random.nextGaussian() * this.dist,
+                    pos.getY() + world.random.nextGaussian() * this.dist,
+                    pos.getZ() + world.random.nextGaussian() * this.dist
             );
-            if (grassPos.distanceSq(pos) <= this.dist * this.dist && world.isBlockLoaded(grassPos)) {
+            if (grassPos.distSqr(pos) <= this.dist * this.dist && world.hasChunkAt(grassPos)) {
                 BlockState state = world.getBlockState(grassPos);
                 Block block = state.getBlock();
 
                 BlockState newState = null;
                 if (block instanceof LeavesBlock && !(block instanceof DynamicLeavesBlock)) {
-                    newState = ModBlocks.DECAYED_LEAVES.getDefaultState();
+                    newState = ModBlocks.DECAYED_LEAVES.defaultBlockState();
                 } else if (block instanceof GrassBlock) {
-                    newState = Blocks.COARSE_DIRT.getDefaultState();
+                    newState = Blocks.COARSE_DIRT.defaultBlockState();
                 } else if (block instanceof BushBlock) {
-                    newState = Blocks.AIR.getDefaultState();
+                    newState = Blocks.AIR.defaultBlockState();
                 } else if (block == ModBlocks.NETHER_GRASS) {
-                    newState = Blocks.NETHERRACK.getDefaultState();
+                    newState = Blocks.NETHERRACK.defaultBlockState();
                 }
                 if (newState != null)
-                    world.setBlockState(grassPos, newState);
+                    world.setBlockAndUpdate(grassPos, newState);
             }
         }
     }

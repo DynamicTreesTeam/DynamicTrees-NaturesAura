@@ -16,6 +16,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public final class DynamicAncientLeavesBlock extends DynamicLeavesBlock {
 
     public DynamicAncientLeavesBlock(LeavesProperties leavesProperties, Properties properties) {
@@ -36,8 +38,8 @@ public final class DynamicAncientLeavesBlock extends DynamicLeavesBlock {
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         super.animateTick(stateIn, worldIn, pos, rand);
-        if (rand.nextFloat() >= 0.95F && !worldIn.getBlockState(pos.down()).isOpaqueCube(worldIn, pos)) {
-            TileEntity tile = worldIn.getTileEntity(pos);
+        if (rand.nextFloat() >= 0.95F && !worldIn.getBlockState(pos.below()).isSolidRender(worldIn, pos)) {
+            TileEntity tile = worldIn.getBlockEntity(pos);
             if (tile instanceof TileEntityAncientLeaves) {
                 if (((TileEntityAncientLeaves) tile).getAuraContainer().getStoredAura() > 0) {
                     NaturesAuraAPI.instance().spawnMagicParticle(
@@ -55,11 +57,11 @@ public final class DynamicAncientLeavesBlock extends DynamicLeavesBlock {
     @Override
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         super.randomTick(state, worldIn, pos, random);
-        if (!worldIn.isRemote) {
-            TileEntity tile = worldIn.getTileEntity(pos);
+        if (!worldIn.isClientSide) {
+            TileEntity tile = worldIn.getBlockEntity(pos);
             if (tile instanceof TileEntityAncientLeaves) {
                 if (((TileEntityAncientLeaves) tile).getAuraContainer().getStoredAura() <= 0) {
-                    worldIn.setBlockState(pos, ModBlocks.DECAYED_LEAVES.getDefaultState());
+                    worldIn.setBlockAndUpdate(pos, ModBlocks.DECAYED_LEAVES.defaultBlockState());
                 }
             }
         }

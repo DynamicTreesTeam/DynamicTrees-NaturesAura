@@ -33,6 +33,8 @@ import java.util.Random;
 
 import static de.ellpeck.naturesaura.blocks.BlockGoldenLeaves.HIGHEST_STAGE;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @SuppressWarnings("deprecation")
 public final class DynamicGoldenLeavesBlock extends DynamicLeavesBlock {
 
@@ -43,8 +45,8 @@ public final class DynamicGoldenLeavesBlock extends DynamicLeavesBlock {
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(STAGE);
     }
 
@@ -61,7 +63,7 @@ public final class DynamicGoldenLeavesBlock extends DynamicLeavesBlock {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        if (stateIn.get(STAGE) == HIGHEST_STAGE && rand.nextFloat() >= 0.75F)
+        if (stateIn.getValue(STAGE) == HIGHEST_STAGE && rand.nextFloat() >= 0.75F)
             NaturesAuraAPI.instance().spawnMagicParticle(
                     pos.getX() + rand.nextFloat(),
                     pos.getY() + rand.nextFloat(),
@@ -73,15 +75,15 @@ public final class DynamicGoldenLeavesBlock extends DynamicLeavesBlock {
     @Override
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         super.randomTick(state, worldIn, pos, random);
-        if (!worldIn.isRemote) {
-            int stage = state.get(STAGE);
+        if (!worldIn.isClientSide) {
+            int stage = state.getValue(STAGE);
             if (stage < HIGHEST_STAGE) {
-                worldIn.setBlockState(pos, state.with(STAGE, stage + 1));
+                worldIn.setBlockAndUpdate(pos, state.setValue(STAGE, stage + 1));
             }
 
             if (stage > 1) {
-                BlockPos offset = pos.offset(Direction.func_239631_a_(random));
-                if (worldIn.isBlockLoaded(offset))
+                BlockPos offset = pos.relative(Direction.getRandom(random));
+                if (worldIn.isLoaded(offset))
                     convert(worldIn, offset);
             }
         }
@@ -95,8 +97,8 @@ public final class DynamicGoldenLeavesBlock extends DynamicLeavesBlock {
     public static int getColour(@Nullable BlockState state, @Nullable IBlockDisplayReader worldIn, @Nullable BlockPos pos, final boolean ratioOverride) {
         final int color = 0xF2FF00;
         if (state != null && worldIn != null && pos != null) {
-            final int foliage = BiomeColors.getFoliageColor(worldIn, pos);
-            return Helper.blendColors(color, foliage, ratioOverride ? 1 : state.get(STAGE) / (float) HIGHEST_STAGE);
+            final int foliage = BiomeColors.getAverageFoliageColor(worldIn, pos);
+            return Helper.blendColors(color, foliage, ratioOverride ? 1 : state.getValue(STAGE) / (float) HIGHEST_STAGE);
         } else {
             return color;
         }
@@ -116,11 +118,11 @@ public final class DynamicGoldenLeavesBlock extends DynamicLeavesBlock {
         if (goldenLeavesProperties == null)
             return false;
 
-        if (!world.isRemote) {
+        if (!world.isClientSide) {
             goldenLeavesProperties.getDynamicLeavesBlock().ifPresent(goldenLeaves ->
-                    world.setBlockState(pos, goldenLeaves.getDefaultState()
-                            .with(DISTANCE, state.hasProperty(DISTANCE) ? state.get(DISTANCE) : 1)
-                            .with(PERSISTENT, state.hasProperty(PERSISTENT) ? state.get(PERSISTENT) : false))
+                    world.setBlockAndUpdate(pos, goldenLeaves.defaultBlockState()
+                            .setValue(DISTANCE, state.hasProperty(DISTANCE) ? state.getValue(DISTANCE) : 1)
+                            .setValue(PERSISTENT, state.hasProperty(PERSISTENT) ? state.getValue(PERSISTENT) : false))
             );
         }
 

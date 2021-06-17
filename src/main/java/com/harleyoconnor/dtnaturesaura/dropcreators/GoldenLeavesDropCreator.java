@@ -36,10 +36,10 @@ public class GoldenLeavesDropCreator extends DropCreator {
         if (!(world.getBlockState(leafPos).getBlock() instanceof DynamicGoldenLeavesBlock))
             return dropList;
 
-        final Random rand = world.rand;
+        final Random rand = world.random;
         final BlockState state = world.getBlockState(leafPos);
 
-        if (state.get(DynamicGoldenLeavesBlock.STAGE) < HIGHEST_STAGE) {
+        if (state.getValue(DynamicGoldenLeavesBlock.STAGE) < HIGHEST_STAGE) {
             if (rand.nextFloat() >= 0.75F) {
                 dropList.add(new ItemStack(ModItems.GOLD_FIBER));
             }

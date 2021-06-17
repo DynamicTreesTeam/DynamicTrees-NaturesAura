@@ -23,6 +23,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
+import de.ellpeck.naturesaura.api.aura.chunk.IDrainSpotEffect.ActiveType;
+
 public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
 
     public static final ResourceLocation NAME = new ResourceLocation(NaturesAura.MOD_ID, "dynamic_leaves_decay");
@@ -46,9 +48,9 @@ public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
 
     @Override
     public ActiveType isActiveHere(PlayerEntity player, Chunk chunk, IAuraChunk auraChunk, BlockPos pos, Integer spot) {
-        if (!this.calcValues(player.world, pos, spot))
+        if (!this.calcValues(player.level, pos, spot))
             return ActiveType.INACTIVE;
-        if (player.getDistanceSq(pos.getX(), pos.getY(), pos.getZ()) > this.dist * this.dist)
+        if (player.distanceToSqr(pos.getX(), pos.getY(), pos.getZ()) > this.dist * this.dist)
             return ActiveType.INACTIVE;
 
         return ActiveType.ACTIVE;
@@ -65,14 +67,14 @@ public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
         if (!this.calcValues(world, pos, spot))
             return;
 
-        for (int i = this.amount / 2 + world.rand.nextInt(this.amount / 2); i >= 0; i--) {
+        for (int i = this.amount / 2 + world.random.nextInt(this.amount / 2); i >= 0; i--) {
             final BlockPos grassPos = new BlockPos(
-                    pos.getX() + world.rand.nextGaussian() * this.dist,
-                    pos.getY() + world.rand.nextGaussian() * this.dist,
-                    pos.getZ() + world.rand.nextGaussian() * this.dist
+                    pos.getX() + world.random.nextGaussian() * this.dist,
+                    pos.getY() + world.random.nextGaussian() * this.dist,
+                    pos.getZ() + world.random.nextGaussian() * this.dist
             );
 
-            if (grassPos.distanceSq(pos) > this.dist * this.dist || !world.isBlockLoaded(grassPos))
+            if (grassPos.distSqr(pos) > this.dist * this.dist || !world.hasChunkAt(grassPos))
                 continue;
 
             final BlockState state = world.getBlockState(grassPos);
@@ -89,7 +91,7 @@ public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
             // shouldn't be able to decay.
             if (properties instanceof SolidLeavesProperties ||
                     AddonConfig.LEAVES_DECAY_BLACKLIST.get().stream()
-                            .map(ResourceLocation::tryCreate)
+                            .map(ResourceLocation::tryParse)
                             .anyMatch(properties.getRegistryName()::equals)
             )
                 continue;
@@ -98,8 +100,8 @@ public class DynamicLeavesDecayEffect implements IDrainSpotEffect {
             LeavesProperties.REGISTRY
                     .get(AddonRegistries.DECAYED)
                     .getDynamicLeavesBlock()
-                    .map(Block::getDefaultState)
-                    .ifPresent(newState -> world.setBlockState(grassPos, newState));
+                    .map(Block::defaultBlockState)
+                    .ifPresent(newState -> world.setBlockAndUpdate(grassPos, newState));
         }
     }
 

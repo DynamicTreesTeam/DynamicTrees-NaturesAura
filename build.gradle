@@ -11,6 +11,7 @@ buildscript {
 }
 
 repositories {
+    mavenLocal()
     maven {
         name 'LDTTeam - Modding'
         url 'https://ldtteam.jfrog.io/ldtteam/modding/'
@@ -48,7 +49,7 @@ archivesBaseName = config.mod_name
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
 minecraft {
-    mappings channel: 'snapshot', version: "20200723-1.16.1"
+    mappings channel: 'official', version: config.mc_version
 
     runs {
         client {
@@ -57,7 +58,8 @@ minecraft {
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
 
-            properties 'mixin.env.disableRefMap' : 'true'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
 
             mods {
                 dtnaturesaura {
@@ -71,6 +73,9 @@ minecraft {
 
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
 
             mods {
                 dtnaturesaura {
@@ -91,9 +96,9 @@ dependencies {
     runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${config.hwyla_version}")
 
     // Compile JEI API, but don't include in runtime.
-    compileOnly fg.deobf("mezz.jei:jei-1.16.4:${config.jei_version}:api")
+    compileOnly fg.deobf("mezz.jei:jei-${config.mc_version}:${config.jei_version}:api")
     // At runtime, use the full JEI mod.
-    runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:${config.jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${config.mc_version}:${config.jei_version}")
 
     // Compile Dynamic Trees, of course.
     implementation fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-${config.mc_version}:${config.dynamic_trees_version}")
