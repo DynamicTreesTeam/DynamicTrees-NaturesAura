@@ -1,13 +1,13 @@
 {
   "replace": false,
   "values": [
-    "dtnaturesaura:golden_jungle_leaves",
-    "dtnaturesaura:golden_acacia_leaves",
-    "dtnaturesaura:ancient_leaves",
-    "dtnaturesaura:golden_birch_leaves",
     "dtnaturesaura:golden_oak_leaves",
+    "dtnaturesaura:golden_birch_leaves",
+    "dtnaturesaura:golden_acacia_leaves",
     "dtnaturesaura:golden_spruce_leaves",
+    "dtnaturesaura:golden_dark_oak_leaves",
     "dtnaturesaura:decayed_leaves",
-    "dtnaturesaura:golden_dark_oak_leaves"
+    "dtnaturesaura:golden_jungle_leaves",
+    "dtnaturesaura:ancient_leaves"
   ]
 }
