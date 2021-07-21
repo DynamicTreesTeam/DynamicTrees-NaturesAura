@@ -14,6 +14,10 @@ buildscript {
     }
 }
 
+plugins {
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
+}
+
 repositories {
     mavenLocal()
     maven {
@@ -168,6 +172,34 @@ jar.finalizedBy('reobfJar')
 
 java {
     withSourcesJar()
+}
+
+curseforge {
+    if (project.hasProperty("curseApiKey") && project.hasProperty("curseFileType")) {
+        apiKey = property("curseApiKey")
+
+        project {
+            id = '403135'
+
+            addGameVersion '1.16.4'
+            addGameVersion mcVersion
+
+            changelog = file('build/changelog.md')
+            changelogType = 'markdown'
+            releaseType = property("curseFileType")
+
+            addArtifact sourcesJar
+
+            mainArtifact(jar) {
+                relations {
+                    requiredDependency 'dynamictrees'
+                    requiredDependency 'natures-aura'
+                }
+            }
+        }
+    } else {
+        project.logger.log(LogLevel.WARN, "API Key and file type for CurseForge not detected; uploading will be disabled.")
+    }
 }
 
 publishing {

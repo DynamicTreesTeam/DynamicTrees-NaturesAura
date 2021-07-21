@@ -1,8 +1,8 @@
 package com.harleyoconnor.dtnaturesaura.dropcreators;
 
+import com.ferreusveritas.dynamictrees.systems.dropcreators.ConfiguredDropCreator;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
-import com.ferreusveritas.dynamictrees.trees.Species;
-import com.harleyoconnor.dtnaturesaura.DTNaturesAura;
+import com.ferreusveritas.dynamictrees.systems.dropcreators.context.DropContext;
 import com.harleyoconnor.dtnaturesaura.blocks.DynamicGoldenLeavesBlock;
 import de.ellpeck.naturesaura.items.ModItems;
 import net.minecraft.block.BlockState;
@@ -18,36 +18,37 @@ import static de.ellpeck.naturesaura.blocks.BlockGoldenLeaves.HIGHEST_STAGE;
 
 public class GoldenLeavesDropCreator extends DropCreator {
 
-    public GoldenLeavesDropCreator() {
-        super(DTNaturesAura.resLoc("golden_leaves"));
+    public GoldenLeavesDropCreator(ResourceLocation registryName) {
+        super(registryName);
     }
 
     @Override
-    public List<ItemStack> getHarvestDrop(World world, Species species, BlockPos leafPos, Random random, List<ItemStack> dropList, int soilLife, int fortune) {
-        return this.getDrops(world, species, leafPos, random, dropList, fortune);
+    protected void registerProperties() {}
+
+    @Override
+    public void appendHarvestDrops(ConfiguredDropCreator<DropCreator> configuration, DropContext context) {
+        this.appendDrops(context.world(), context.pos(), context.random(), context.drops(), context.fortune());
     }
 
     @Override
-    public List<ItemStack> getLeavesDrop(World world, Species species, BlockPos breakPos, Random random, List<ItemStack> dropList, int fortune) {
-        return this.getDrops(world, species, breakPos, random, dropList, fortune);
+    public void appendLeavesDrops(ConfiguredDropCreator<DropCreator> configuration, DropContext context) {
+        this.appendDrops(context.world(), context.pos(), context.random(), context.drops(), context.fortune());
     }
 
-    private List<ItemStack> getDrops (World world, Species species, BlockPos leafPos, Random random, List<ItemStack> dropList, int fortune) {
-        if (!(world.getBlockState(leafPos).getBlock() instanceof DynamicGoldenLeavesBlock))
-            return dropList;
-
-        final Random rand = world.random;
+    private void appendDrops(World world, BlockPos leafPos, Random random, List<ItemStack> dropList, int fortune) {
         final BlockState state = world.getBlockState(leafPos);
 
-        if (state.getValue(DynamicGoldenLeavesBlock.STAGE) < HIGHEST_STAGE) {
-            if (rand.nextFloat() >= 0.75F) {
-                dropList.add(new ItemStack(ModItems.GOLD_FIBER));
-            }
-        } else if (rand.nextFloat() >= 0.25F) {
-            dropList.add(new ItemStack(ModItems.GOLD_LEAF));
+        if (!(state.getBlock() instanceof DynamicGoldenLeavesBlock)) {
+            return;
         }
 
-        return dropList;
+        if (state.getValue(DynamicGoldenLeavesBlock.STAGE) < HIGHEST_STAGE) {
+            if (random.nextFloat() >= 0.75F) {
+                dropList.add(new ItemStack(ModItems.GOLD_FIBER));
+            }
+        } else if (random.nextFloat() >= 0.25F) {
+            dropList.add(new ItemStack(ModItems.GOLD_LEAF));
+        }
     }
 
 }

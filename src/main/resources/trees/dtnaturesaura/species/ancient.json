@@ -9,8 +9,6 @@
   "max_branch_radius": 24,
   "growth_logic_kit": "conifer",
   "leaves_properties": "dtnaturesaura:ancient",
-  "seed_drop_rarity": 1.0,
-  "stick_drop_rarity": 1.0,
   "primitive_sapling": "naturesaura:ancient_sapling",
   "features" : [
     "roots"
