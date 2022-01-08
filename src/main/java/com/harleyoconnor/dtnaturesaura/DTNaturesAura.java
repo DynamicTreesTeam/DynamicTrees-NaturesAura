@@ -1,6 +1,6 @@
 package com.harleyoconnor.dtnaturesaura;
 
-import com.ferreusveritas.dynamictrees.DynamicTrees;
+import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
 import com.ferreusveritas.dynamictrees.trees.Species;
@@ -47,7 +47,7 @@ public class DTNaturesAura {
 	}
 
 	public void gatherData(final GatherDataEvent event) {
-		DynamicTrees.gatherTagGenerators(MOD_ID, event);
+		GatherDataHelper.gatherAllData(MOD_ID, event);
 	}
 
 	public static ResourceLocation resLoc(final String path) {

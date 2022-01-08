@@ -3,13 +3,14 @@ package com.harleyoconnor.dtnaturesaura;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryEvent;
 import com.ferreusveritas.dynamictrees.api.registry.TypeRegistryEvent;
-import com.ferreusveritas.dynamictrees.api.treepacks.JsonApplierRegistryEvent;
+import com.ferreusveritas.dynamictrees.api.treepacks.ApplierRegistryEvent;
 import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
-import com.ferreusveritas.dynamictrees.systems.dropcreators.ConfiguredDropCreator;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
+import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreatorConfiguration;
 import com.ferreusveritas.dynamictrees.trees.Family;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.google.common.collect.Maps;
+import com.google.gson.JsonElement;
 import com.harleyoconnor.dtnaturesaura.blocks.AncientLeavesProperties;
 import com.harleyoconnor.dtnaturesaura.blocks.DecayedLeavesProperties;
 import com.harleyoconnor.dtnaturesaura.blocks.GoldenLeavesProperties;
@@ -48,7 +49,7 @@ public final class AddonRegistries {
     }
 
     public static final DropCreator GOLDEN_LEAVES_DROP_CREATOR = new GoldenLeavesDropCreator(DTNaturesAura.resLoc("golden_leaves"));
-    private static final ConfiguredDropCreator<DropCreator> DEFAULT_GOLDEN_LEAVES_DROP_CREATOR = GOLDEN_LEAVES_DROP_CREATOR.getDefaultConfiguration();
+    private static final DropCreatorConfiguration DEFAULT_GOLDEN_LEAVES_DROP_CREATOR = GOLDEN_LEAVES_DROP_CREATOR.getDefaultConfiguration();
 
     @SubscribeEvent
     public static void registerDropCreator(final RegistryEvent<DropCreator> event) {
@@ -56,12 +57,8 @@ public final class AddonRegistries {
     }
 
     @SubscribeEvent
-    public static void addValidLeafBlocks(final JsonApplierRegistryEvent<LeavesProperties> event) {
-        if (!event.isLoadApplier()) {
-            return;
-        }
-
-        event.getApplierList().register("family", GoldenLeavesProperties.class, ResourceLocation.class,
+    public static void addValidLeafBlocks(final ApplierRegistryEvent.Load<LeavesProperties, JsonElement> event) {
+        event.getAppliers().register("family", GoldenLeavesProperties.class, ResourceLocation.class,
                 (leavesProperties, resourceLocation) -> {
             final ResourceLocation registryName = TreeRegistry.processResLoc(resourceLocation);
 
@@ -76,14 +73,10 @@ public final class AddonRegistries {
     }
 
     @SubscribeEvent
-    public static void addDropCreators(final JsonApplierRegistryEvent<LeavesProperties> event) {
-        if (!event.isReloadApplier()) {
-            return;
-        }
-
+    public static void addDropCreators(final ApplierRegistryEvent.Reload<LeavesProperties, JsonElement> event) {
         final List<Species> speciesList = new LinkedList<>();
 
-        event.getApplierList().register("family", GoldenLeavesProperties.class, ResourceLocation.class,
+        event.getAppliers().register("family", GoldenLeavesProperties.class, ResourceLocation.class,
                 (leavesProperties, resourceLocation) -> {
             final ResourceLocation registryName = TreeRegistry.processResLoc(resourceLocation);
 

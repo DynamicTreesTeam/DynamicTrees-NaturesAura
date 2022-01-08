@@ -1,7 +1,7 @@
 package com.harleyoconnor.dtnaturesaura.dropcreators;
 
-import com.ferreusveritas.dynamictrees.systems.dropcreators.ConfiguredDropCreator;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
+import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreatorConfiguration;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.context.DropContext;
 import com.harleyoconnor.dtnaturesaura.blocks.DynamicGoldenLeavesBlock;
 import de.ellpeck.naturesaura.items.ModItems;
@@ -26,12 +26,12 @@ public class GoldenLeavesDropCreator extends DropCreator {
     protected void registerProperties() {}
 
     @Override
-    public void appendHarvestDrops(ConfiguredDropCreator<DropCreator> configuration, DropContext context) {
+    public void appendHarvestDrops(DropCreatorConfiguration configuration, DropContext context) {
         this.appendDrops(context.world(), context.pos(), context.random(), context.drops(), context.fortune());
     }
 
     @Override
-    public void appendLeavesDrops(ConfiguredDropCreator<DropCreator> configuration, DropContext context) {
+    public void appendLeavesDrops(DropCreatorConfiguration configuration, DropContext context) {
         this.appendDrops(context.world(), context.pos(), context.random(), context.drops(), context.fortune());
     }
 
