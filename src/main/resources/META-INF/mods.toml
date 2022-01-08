@@ -1,6 +1,6 @@
 license="MIT"
 modLoader="javafml"
-loaderVersion="[35,)"
+loaderVersion="[36,37)"
 issueTrackerURL="https://github.com/Harleyoc1/DynamicTreesNaturesAura/issues"
 
 [[mods]]
@@ -19,21 +19,21 @@ Adds Dynamic Trees compatibility to Nature's Aura.
 [[dependencies.dtnaturesaura]]
     modId="forge"
     mandatory=true
-    versionRange="[35,)"
+    versionRange="[36.2.20,37)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.dtnaturesaura]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.4,1.16.5]"
+    versionRange="[1.16.5,1.17)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.dtnaturesaura]]
     modId="dynamictrees"
     mandatory=true
-    versionRange="[0.10.0-Beta10,)"
+    versionRange="[0.10.0-Beta27,)"
     ordering="AFTER"
     side="BOTH"
 
