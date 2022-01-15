@@ -3,7 +3,6 @@ import com.google.gson.JsonObject
 import com.matthewprenger.cursegradle.CurseArtifact
 import com.matthewprenger.cursegradle.CurseProject
 import com.matthewprenger.cursegradle.CurseRelation
-import org.apache.tools.ant.filters.ReplaceTokens
 import java.io.InputStreamReader
 import java.time.Instant
 import java.time.format.DateTimeFormatter
@@ -174,21 +173,24 @@ curseforge {
     apiKey = property("curseApiKey")
 
     project {
-        id = 403135
+        id = property("curse.id")
 
         addGameVersion(mcVersion)
 
         changelog = readChangelog() ?: "No changelog provided."
         changelogType = "markdown"
-        releaseType = property("curseFileType")
-
-        addArtifact(tasks.findByName("sourcesJar"))
+        releaseType = property("curse.file.type")
 
         mainArtifact(tasks.findByName("jar")) {
+            displayName = project.version.toString()
             relations {
                 requiredDependency("dynamictrees")
                 requiredDependency("natures-aura")
             }
+        }
+
+        addArtifact(tasks.findByName("sourcesJar")) {
+            displayName = "${project.version} [Sources]"
         }
     }
 }
@@ -288,4 +290,8 @@ fun CurseProject.mainArtifact(artifact: Task?, action: CurseArtifact.() -> Unit)
 
 fun CurseArtifact.relations(action: CurseRelation.() -> Unit) {
     this.relations(closureOf(action))
+}
+
+fun CurseProject.addArtifact(artifact: Task?, action: CurseArtifact.() -> Unit) {
+    this.addArtifact(artifact, closureOf(action))
 }
