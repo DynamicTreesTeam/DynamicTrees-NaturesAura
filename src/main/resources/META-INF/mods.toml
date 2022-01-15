@@ -1,13 +1,13 @@
 license="MIT"
 modLoader="javafml"
 loaderVersion="[36,37)"
-issueTrackerURL="https://github.com/Harleyoc1/DynamicTreesNaturesAura/issues"
+issueTrackerURL="https://github.com/DynamicTreesTeam/DynamicTrees-NaturesAura/issues"
 
 [[mods]]
 modId="dtnaturesaura"
 version="${file.jarVersion}"
 displayName="Dynamic Trees for Nature's Aura"
-updateJSONURL="https://github.com/Harleyoc1/DynamicTreesNaturesAura/blob/1.16.5/version_info.json?raw=true"
+updateJSONURL="https://github.com/DynamicTreesTeam/DynamicTreesVersionInfo/blob/master/Add-ons/NaturesAura.json?raw=true"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/dynamic-trees-natures-aura"
 logoFile="dtna-logo.png"
 credits=""
