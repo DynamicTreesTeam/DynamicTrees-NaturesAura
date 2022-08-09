@@ -1,4 +1,4 @@
-package com.harleyoconnor.dtnaturesaura.blocks;
+package com.harleyoconnor.dtnaturesaura.block;
 
 import com.ferreusveritas.dynamictrees.blocks.leaves.DynamicLeavesBlock;
 import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
@@ -15,8 +15,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public final class DynamicAncientLeavesBlock extends DynamicLeavesBlock {
 

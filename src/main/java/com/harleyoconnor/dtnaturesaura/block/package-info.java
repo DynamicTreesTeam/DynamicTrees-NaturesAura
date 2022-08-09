@@ -1,5 +1,5 @@
 @MethodsReturnNonnullByDefault @ParametersAreNonnullByDefault
-package com.harleyoconnor.dtnaturesaura.blocks;
+package com.harleyoconnor.dtnaturesaura.block;
 
 import mcp.MethodsReturnNonnullByDefault;
 

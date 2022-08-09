@@ -112,8 +112,10 @@ sourceSets.main.get().resources {
 dependencies {
     minecraft("net.minecraftforge:forge:${mcVersion}-${property("forgeVersion")}")
 
-    compileOnly(fg.deobf("mcp.mobius.waila:Hwyla:${property("hwylaVersion")}:api"))
-    runtimeOnly(fg.deobf("mcp.mobius.waila:Hwyla:${property("hwylaVersion")}"))
+    // Temp as TehNut Maven is down.
+    implementation(fg.deobf("curse.maven:hwyla-253449:3033593"))
+//    compileOnly(fg.deobf("mcp.mobius.waila:Hwyla:${property("hwylaVersion")}:api"))
+//    runtimeOnly(fg.deobf("mcp.mobius.waila:Hwyla:${property("hwylaVersion")}"))
 
     compileOnly(fg.deobf("mezz.jei:jei-${mcVersion}:${property("jeiVersion")}:api"))
     runtimeOnly(fg.deobf("mezz.jei:jei-${mcVersion}:${property("jeiVersion")}"))

@@ -4,9 +4,9 @@ import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
 import com.ferreusveritas.dynamictrees.trees.Species;
-import com.harleyoconnor.dtnaturesaura.effects.DynamicLeavesDecayEffect;
-import com.harleyoconnor.dtnaturesaura.effects.GrassDieEffect;
-import com.harleyoconnor.dtnaturesaura.events.BrilliantFiberClickEventHandler;
+import com.harleyoconnor.dtnaturesaura.effect.DynamicLeavesDecayEffect;
+import com.harleyoconnor.dtnaturesaura.effect.GrassDieEffect;
+import com.harleyoconnor.dtnaturesaura.event.BrilliantFiberClickEventHandler;
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -20,38 +20,38 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(DTNaturesAura.MOD_ID)
 public class DTNaturesAura {
 
-	public static final String MOD_ID = "dtnaturesaura";
+    public static final String MOD_ID = "dtnaturesaura";
 
-	public DTNaturesAura() {
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData);
+    public DTNaturesAura() {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData);
 
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, AddonConfig.COMMON_CONFIG);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, AddonConfig.COMMON_CONFIG);
 
-		RegistryHandler.setup(MOD_ID);
-	}
+        RegistryHandler.setup(MOD_ID);
+    }
 
-	private void setup (final FMLCommonSetupEvent event) {
-		// Register brilliant fiber click event for dynamic leaves.
-		MinecraftForge.EVENT_BUS.register(new BrilliantFiberClickEventHandler());
+    private void setup(final FMLCommonSetupEvent event) {
+        // Register brilliant fiber click event for dynamic leaves.
+        MinecraftForge.EVENT_BUS.register(new BrilliantFiberClickEventHandler());
 
-		// Overwrite grass die effect so that it doesn't convert dynamic leaves.
-		NaturesAuraAPI.DRAIN_SPOT_EFFECTS.put(GrassDieEffect.NAME, GrassDieEffect::new);
+        // Overwrite grass die effect so that it doesn't convert dynamic leaves.
+        NaturesAuraAPI.DRAIN_SPOT_EFFECTS.put(GrassDieEffect.NAME, GrassDieEffect::new);
 
-		// Add drain spot effect for decaying dynamic leaves.
-		NaturesAuraAPI.DRAIN_SPOT_EFFECTS.put(DynamicLeavesDecayEffect.NAME, DynamicLeavesDecayEffect::new);
+        // Add drain spot effect for decaying dynamic leaves.
+        NaturesAuraAPI.DRAIN_SPOT_EFFECTS.put(DynamicLeavesDecayEffect.NAME, DynamicLeavesDecayEffect::new);
 
-		// Register decayed leaves properties as valid leaves for any tree.
-		final LeavesProperties decayedProperties = LeavesProperties.REGISTRY.get(AddonRegistries.DECAYED);
-		Species.REGISTRY.getAll().forEach(species -> species.addValidLeafBlocks(decayedProperties));
-	}
+        // Register decayed leaves properties as valid leaves for any tree.
+        final LeavesProperties decayedProperties = LeavesProperties.REGISTRY.get(AddonRegistries.DECAYED);
+        Species.REGISTRY.getAll().forEach(species -> species.addValidLeafBlocks(decayedProperties));
+    }
 
-	public void gatherData(final GatherDataEvent event) {
-		GatherDataHelper.gatherAllData(MOD_ID, event);
-	}
+    public void gatherData(final GatherDataEvent event) {
+        GatherDataHelper.gatherAllData(MOD_ID, event);
+    }
 
-	public static ResourceLocation resLoc(final String path) {
-		return new ResourceLocation(MOD_ID, path);
-	}
+    public static ResourceLocation resLoc(final String path) {
+        return new ResourceLocation(MOD_ID, path);
+    }
 
 }
