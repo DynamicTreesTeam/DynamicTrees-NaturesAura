@@ -5,11 +5,11 @@ Dynamic Trees for Nature's Aura
 </h1>
 <p align="center">
     <a href="https://www.curseforge.com/minecraft/mc-mods/dynamic-trees-natures-aura">
-        <img src="http://cf.way2muchnoise.eu/dynamic-trees-natures-aura.svg"  alt="Downloads"/>
-        <img src="http://cf.way2muchnoise.eu/versions/dynamic-trees-natures-aura.svg"  alt="Versions"/>
+        <img src="http://cf.way2muchnoise.eu/403135.svg"  alt="Downloads"/>
+        <img src="http://cf.way2muchnoise.eu/versions/403135.svg"  alt="Versions"/>
     </a>
     <a href="https://www.curseforge.com/minecraft/mc-mods/dynamictrees">
-        <img src="http://cf.way2muchnoise.eu/title/dynamictrees_Requires_%20.svg"  alt="RequiresDT"/>
+        <img src="http://cf.way2muchnoise.eu/title/252818_Requires_%20.svg"  alt="RequiresDT"/>
     </a>
 </p>
 <br>
