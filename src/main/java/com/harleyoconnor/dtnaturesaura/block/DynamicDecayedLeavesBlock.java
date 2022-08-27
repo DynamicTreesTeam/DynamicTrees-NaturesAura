@@ -1,4 +1,4 @@
-package com.harleyoconnor.dtnaturesaura.blocks;
+package com.harleyoconnor.dtnaturesaura.block;
 
 import com.ferreusveritas.dynamictrees.blocks.leaves.DynamicLeavesBlock;
 import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
@@ -25,7 +25,8 @@ public class DynamicDecayedLeavesBlock extends DynamicLeavesBlock {
     }
 
     @Override
-    public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
+    public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos,
+                                  PlayerEntity player) {
         return new ItemStack(ModBlocks.DECAYED_LEAVES.asItem());
     }
 
@@ -37,7 +38,8 @@ public class DynamicDecayedLeavesBlock extends DynamicLeavesBlock {
     }
 
     @Override
-    public List<ItemStack> getDrops(@Nullable PlayerEntity player, ItemStack item, World world, BlockPos pos, int fortune) {
+    public List<ItemStack> getDrops(@Nullable PlayerEntity player, ItemStack item, World world, BlockPos pos,
+                                    int fortune) {
         return Collections.emptyList();
     }
 

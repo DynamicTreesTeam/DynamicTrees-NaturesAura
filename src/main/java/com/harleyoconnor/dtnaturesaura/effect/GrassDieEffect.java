@@ -1,4 +1,4 @@
-package com.harleyoconnor.dtnaturesaura.effects;
+package com.harleyoconnor.dtnaturesaura.effect;
 
 import com.ferreusveritas.dynamictrees.blocks.leaves.DynamicLeavesBlock;
 import de.ellpeck.naturesaura.ModConfig;
@@ -18,8 +18,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 /**
- * Replacement for {@link de.ellpeck.naturesaura.chunk.effect.GrassDieEffect}
- * so that it doesn't convert dynamic leaves to non-dynamic decayed leaves.
+ * Replacement for {@link de.ellpeck.naturesaura.chunk.effect.GrassDieEffect} so that it doesn't convert dynamic leaves
+ * to non-dynamic decayed leaves.
  *
  * @author Harley O'Connor
  */
@@ -34,7 +34,8 @@ public class GrassDieEffect implements IDrainSpotEffect {
         if (spot < 0) {
             int aura = IAuraChunk.getAuraInArea(world, pos, 50);
             if (aura < 0) {
-                this.amount = Math.min(300, MathHelper.ceil(Math.abs(aura) / 100000F / IAuraChunk.getSpotAmountInArea(world, pos, 50)));
+                this.amount = Math.min(300,
+                        MathHelper.ceil(Math.abs(aura) / 100000F / IAuraChunk.getSpotAmountInArea(world, pos, 50)));
                 if (this.amount > 1) {
                     this.dist = MathHelper.clamp(Math.abs(aura) / 75000, 5, 75);
                     return true;
@@ -46,10 +47,12 @@ public class GrassDieEffect implements IDrainSpotEffect {
 
     @Override
     public ActiveType isActiveHere(PlayerEntity player, Chunk chunk, IAuraChunk auraChunk, BlockPos pos, Integer spot) {
-        if (!this.calcValues(player.level, pos, spot))
+        if (!this.calcValues(player.level, pos, spot)) {
             return ActiveType.INACTIVE;
-        if (player.distanceToSqr(pos.getX(), pos.getY(), pos.getZ()) > this.dist * this.dist)
+        }
+        if (player.distanceToSqr(pos.getX(), pos.getY(), pos.getZ()) > this.dist * this.dist) {
             return ActiveType.INACTIVE;
+        }
         return ActiveType.ACTIVE;
     }
 
@@ -61,8 +64,9 @@ public class GrassDieEffect implements IDrainSpotEffect {
     @SuppressWarnings("deprecation")
     @Override
     public void update(World world, Chunk chunk, IAuraChunk auraChunk, BlockPos pos, Integer spot) {
-        if (!this.calcValues(world, pos, spot))
+        if (!this.calcValues(world, pos, spot)) {
             return;
+        }
 
         for (int i = this.amount / 2 + world.random.nextInt(this.amount / 2); i >= 0; i--) {
             BlockPos grassPos = new BlockPos(
@@ -84,15 +88,17 @@ public class GrassDieEffect implements IDrainSpotEffect {
                 } else if (block == ModBlocks.NETHER_GRASS) {
                     newState = Blocks.NETHERRACK.defaultBlockState();
                 }
-                if (newState != null)
+                if (newState != null) {
                     world.setBlockAndUpdate(grassPos, newState);
+                }
             }
         }
     }
 
     @Override
     public boolean appliesHere(Chunk chunk, IAuraChunk auraChunk, IAuraType type) {
-        return ModConfig.instance.grassDieEffect.get() && (type.isSimilar(NaturesAuraAPI.TYPE_OVERWORLD) || type.isSimilar(NaturesAuraAPI.TYPE_NETHER));
+        return ModConfig.instance.grassDieEffect.get() &&
+                (type.isSimilar(NaturesAuraAPI.TYPE_OVERWORLD) || type.isSimilar(NaturesAuraAPI.TYPE_NETHER));
     }
 
     @Override
