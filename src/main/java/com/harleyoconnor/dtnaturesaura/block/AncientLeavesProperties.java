@@ -1,12 +1,12 @@
 package com.harleyoconnor.dtnaturesaura.block;
 
 import com.ferreusveritas.dynamictrees.api.registry.TypedRegistry;
-import com.ferreusveritas.dynamictrees.blocks.leaves.DynamicLeavesBlock;
-import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
+import com.ferreusveritas.dynamictrees.block.leaves.DynamicLeavesBlock;
+import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
 import com.harleyoconnor.dtnaturesaura.util.LootTableHelper;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.loot.LootTable;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.storage.loot.LootTable;
 
 /**
  * @author Harley O'Connor
@@ -21,7 +21,7 @@ public final class AncientLeavesProperties extends LeavesProperties {
     }
 
     @Override
-    protected DynamicLeavesBlock createDynamicLeaves(AbstractBlock.Properties properties) {
+    protected DynamicLeavesBlock createDynamicLeaves(BlockBehaviour.Properties properties) {
         return new DynamicAncientLeavesBlock(this, properties);
     }
 

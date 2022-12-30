@@ -1,16 +1,16 @@
 package com.harleyoconnor.dtnaturesaura;
 
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
+import com.ferreusveritas.dynamictrees.api.applier.ApplierRegistryEvent;
 import com.ferreusveritas.dynamictrees.api.registry.TypeRegistryEvent;
-import com.ferreusveritas.dynamictrees.api.treepacks.ApplierRegistryEvent;
-import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
-import com.ferreusveritas.dynamictrees.trees.Family;
+import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
+import com.ferreusveritas.dynamictrees.tree.family.Family;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
 import com.harleyoconnor.dtnaturesaura.block.AncientLeavesProperties;
 import com.harleyoconnor.dtnaturesaura.block.DecayedLeavesProperties;
 import com.harleyoconnor.dtnaturesaura.block.GoldenLeavesProperties;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
@@ -26,17 +26,17 @@ public final class AddonRegistries {
     /**
      * The {@link ResourceLocation} of ancient leaves properties (and their type).
      */
-    public static final ResourceLocation ANCIENT = DTNaturesAura.resLoc("ancient");
+    public static final ResourceLocation ANCIENT = DTNaturesAura.location("ancient");
 
     /**
      * The {@link ResourceLocation} of golden leaves properties type.
      */
-    public static final ResourceLocation GOLDEN = DTNaturesAura.resLoc("golden");
+    public static final ResourceLocation GOLDEN = DTNaturesAura.location("golden");
 
     /**
      * The {@link ResourceLocation} of decayed leaves properties (and their type).
      */
-    public static final ResourceLocation DECAYED = DTNaturesAura.resLoc("decayed");
+    public static final ResourceLocation DECAYED = DTNaturesAura.location("decayed");
 
     public static final Map<Family, LeavesProperties> FAMILY_GOLDEN_LEAVES_MAP = Maps.newHashMap();
 

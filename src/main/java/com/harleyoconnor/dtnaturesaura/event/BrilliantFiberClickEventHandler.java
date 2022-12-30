@@ -1,10 +1,10 @@
 package com.harleyoconnor.dtnaturesaura.event;
 
-import com.ferreusveritas.dynamictrees.blocks.leaves.DynamicLeavesBlock;
+import com.ferreusveritas.dynamictrees.block.leaves.DynamicLeavesBlock;
 import com.harleyoconnor.dtnaturesaura.block.DynamicGoldenLeavesBlock;
 import de.ellpeck.naturesaura.items.ModItems;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,8 +16,7 @@ public final class BrilliantFiberClickEventHandler {
         final ItemStack stack = event.getItemStack();
         final BlockState state = event.getWorld().getBlockState(event.getPos());
 
-        if (!stack.getItem().equals(ModItems.GOLD_FIBER) ||
-                !(state.getBlock() instanceof DynamicLeavesBlock)) {
+        if (!stack.getItem().equals(ModItems.GOLD_FIBER) || !(state.getBlock() instanceof DynamicLeavesBlock)) {
             return;
         }
 

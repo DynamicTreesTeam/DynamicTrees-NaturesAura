@@ -1,17 +1,17 @@
 package com.harleyoconnor.dtnaturesaura.block;
 
 import com.ferreusveritas.dynamictrees.api.registry.TypedRegistry;
-import com.ferreusveritas.dynamictrees.blocks.leaves.DynamicLeavesBlock;
-import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
+import com.ferreusveritas.dynamictrees.block.leaves.DynamicLeavesBlock;
+import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
 import com.ferreusveritas.dynamictrees.loot.DTLootParameterSets;
 import com.harleyoconnor.dtnaturesaura.util.LootTableHelper;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.loot.LootParameterSets;
-import net.minecraft.loot.LootTable;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockDisplayReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 /**
  * @author Harley O'Connor
@@ -26,23 +26,23 @@ public final class GoldenLeavesProperties extends LeavesProperties {
     }
 
     @Override
-    protected DynamicLeavesBlock createDynamicLeaves(AbstractBlock.Properties properties) {
+    protected DynamicLeavesBlock createDynamicLeaves(BlockBehaviour.Properties properties) {
         return new DynamicGoldenLeavesBlock(this, properties);
     }
 
     @Override
-    public int treeFallColorMultiplier(BlockState state, IBlockDisplayReader world, BlockPos pos) {
+    public int treeFallColorMultiplier(BlockState state, BlockAndTintGetter world, BlockPos pos) {
         return DynamicGoldenLeavesBlock.getColour(state, world, pos, true);
     }
 
     @Override
-    public int foliageColorMultiplier(BlockState state, IBlockDisplayReader world, BlockPos pos) {
+    public int foliageColorMultiplier(BlockState state, BlockAndTintGetter world, BlockPos pos) {
         return DynamicGoldenLeavesBlock.getBlockColour().getColor(state, world, pos, -1);
     }
 
     @Override
     public LootTable.Builder createBlockDrops() {
-        return LootTableHelper.createGoldenLeavesTable(getDynamicLeavesState().getBlock(), LootParameterSets.BLOCK);
+        return LootTableHelper.createGoldenLeavesTable(getDynamicLeavesState().getBlock(), LootContextParamSets.BLOCK);
     }
 
     @Override

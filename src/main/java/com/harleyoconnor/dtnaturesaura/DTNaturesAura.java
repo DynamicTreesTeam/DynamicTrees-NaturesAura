@@ -2,20 +2,20 @@ package com.harleyoconnor.dtnaturesaura;
 
 import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
-import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
-import com.ferreusveritas.dynamictrees.trees.Species;
+import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
+import com.ferreusveritas.dynamictrees.tree.species.Species;
 import com.harleyoconnor.dtnaturesaura.effect.DynamicLeavesDecayEffect;
 import com.harleyoconnor.dtnaturesaura.effect.GrassDieEffect;
 import com.harleyoconnor.dtnaturesaura.event.BrilliantFiberClickEventHandler;
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @Mod(DTNaturesAura.MOD_ID)
 public class DTNaturesAura {
@@ -50,7 +50,7 @@ public class DTNaturesAura {
         GatherDataHelper.gatherAllData(MOD_ID, event);
     }
 
-    public static ResourceLocation resLoc(final String path) {
+    public static ResourceLocation location(final String path) {
         return new ResourceLocation(MOD_ID, path);
     }
 
