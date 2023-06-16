@@ -6,6 +6,7 @@ import com.ferreusveritas.dynamictrees.util.BlockStates;
 import de.ellpeck.naturesaura.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -16,7 +17,6 @@ import net.minecraft.world.phys.HitResult;
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class DynamicDecayedLeavesBlock extends DynamicLeavesBlock {
 
@@ -30,7 +30,7 @@ public class DynamicDecayedLeavesBlock extends DynamicLeavesBlock {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random rand) {
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!level.isClientSide) {
             level.setBlockAndUpdate(pos, BlockStates.AIR);
         }

@@ -10,12 +10,12 @@ import com.harleyoconnor.dtnaturesaura.event.BrilliantFiberClickEventHandler;
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @Mod(DTNaturesAura.MOD_ID)
 public class DTNaturesAura {

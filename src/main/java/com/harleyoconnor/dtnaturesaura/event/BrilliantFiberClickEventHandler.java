@@ -14,7 +14,7 @@ public final class BrilliantFiberClickEventHandler {
     @SubscribeEvent
     public void onClick(PlayerInteractEvent.RightClickBlock event) {
         final ItemStack stack = event.getItemStack();
-        final BlockState state = event.getWorld().getBlockState(event.getPos());
+        final BlockState state = event.getLevel().getBlockState(event.getPos());
 
         if (!stack.getItem().equals(ModItems.GOLD_FIBER) || !(state.getBlock() instanceof DynamicLeavesBlock)) {
             return;
@@ -22,14 +22,14 @@ public final class BrilliantFiberClickEventHandler {
 
         event.setCanceled(true);
 
-        if (!DynamicGoldenLeavesBlock.convert(event.getWorld(), event.getPos())) {
+        if (!DynamicGoldenLeavesBlock.convert(event.getLevel(), event.getPos())) {
             return;
         }
 
         event.setResult(Event.Result.ALLOW);
-        event.getPlayer().swing(event.getHand());
+        event.getEntity().swing(event.getHand());
 
-        if (!event.getWorld().isClientSide && !event.getPlayer().isCreative()) {
+        if (!event.getLevel().isClientSide && !event.getEntity().isCreative()) {
             stack.shrink(1);
         }
     }

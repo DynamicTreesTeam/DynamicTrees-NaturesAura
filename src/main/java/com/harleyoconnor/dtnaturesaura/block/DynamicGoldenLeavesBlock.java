@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -61,19 +62,19 @@ public final class DynamicGoldenLeavesBlock extends DynamicLeavesBlock {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState state, Level level, BlockPos pos, Random rand) {
-        if (state.getValue(STAGE) == HIGHEST_STAGE && rand.nextFloat() >= 0.75F) {
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (state.getValue(STAGE) == HIGHEST_STAGE && random.nextFloat() >= 0.75F) {
             NaturesAuraAPI.instance().spawnMagicParticle(
-                    pos.getX() + rand.nextFloat(),
-                    pos.getY() + rand.nextFloat(),
-                    pos.getZ() + rand.nextFloat(),
+                    pos.getX() + random.nextFloat(),
+                    pos.getY() + random.nextFloat(),
+                    pos.getZ() + random.nextFloat(),
                     0F, 0F, 0F,
-                    0xF2FF00, 0.5F + rand.nextFloat(), 50, 0F, false, true);
+                    0xF2FF00, 0.5F + random.nextFloat(), 50, 0F, false, true);
         }
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         super.randomTick(state, level, pos, random);
         if (!level.isClientSide) {
             int stage = state.getValue(STAGE);
