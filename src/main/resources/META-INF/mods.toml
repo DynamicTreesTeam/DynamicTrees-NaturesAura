@@ -40,6 +40,6 @@ Adds Dynamic Trees compatibility to Nature's Aura.
 [[dependencies.dtnaturesaura]]
     modId="naturesaura"
     mandatory=true
-    versionRange="[38.0,)"
+    versionRange="[38.2,39)"
     ordering="AFTER"
     side="BOTH"

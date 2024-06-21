@@ -82,9 +82,9 @@ dependencies {
     minecraft("net.minecraftforge:forge:$mcVersion-${property("forgeVersion")}")
 
     implementation(fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-$mcVersion:${property("dynamicTreesVersion")}"))
-    implementation(fg.deobf("curse.maven:NaturesAura-306626:4419637"))
+    implementation(fg.deobf("curse.maven:NaturesAura-306626:4613484"))
 
-    runtimeOnly(fg.deobf("curse.maven:jade-324717:4160646"))
+    runtimeOnly(fg.deobf("curse.maven:jade-324717:4914105"))
     runtimeOnly(fg.deobf("vazkii.patchouli:Patchouli:$mcVersion-${property("patchouliVersion")}"))
     runtimeOnly(fg.deobf("mezz.jei:jei-$mcVersion-forge:${property("jeiVersion")}"))
     runtimeOnly(fg.deobf("org.squiddev:cc-tweaked-$mcVersion:${property("ccVersion")}"))
