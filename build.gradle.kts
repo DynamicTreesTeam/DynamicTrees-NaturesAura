@@ -68,7 +68,8 @@ minecraft {
                 "--all",
                 "--output", file("src/generated/resources/"),
                 "--existing", file("src/main/resources"),
-                "--existing-mod", "dynamictrees"
+                "--existing-mod", "dynamictrees",
+                "--existing-mod", "natures-aura"
             )
         }
     }
@@ -79,17 +80,21 @@ sourceSets.main.get().resources {
 }
 
 dependencies {
+    //libs
     minecraft("net.minecraftforge:forge:$mcVersion-${property("forgeVersion")}")
 
+    //DynamicTrees
     implementation(fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-$mcVersion:${property("dynamicTreesVersion")}"))
-    implementation(fg.deobf("curse.maven:NaturesAura-306626:4613484"))
 
-    runtimeOnly(fg.deobf("curse.maven:jade-324717:4914105"))
-    runtimeOnly(fg.deobf("vazkii.patchouli:Patchouli:$mcVersion-${property("patchouliVersion")}"))
-    runtimeOnly(fg.deobf("mezz.jei:jei-$mcVersion-forge:${property("jeiVersion")}"))
-    runtimeOnly(fg.deobf("org.squiddev:cc-tweaked-$mcVersion:${property("ccVersion")}"))
-    runtimeOnly(fg.deobf("curse.maven:ShutUpExperimentalSettings-407174:3759881"))
-    runtimeOnly(fg.deobf("com.harleyoconnor.suggestionproviderfix:SuggestionProviderFix-1.19:${property("suggestionProviderFixVersion")}"))
+    //DynamicTrees Utilities
+    runtimeOnly(fg.deobf("curse.maven:jade-324717:5072729"))
+    runtimeOnly(fg.deobf("curse.maven:jei-238222:5101366"))
+    runtimeOnly(fg.deobf("curse.maven:cc-tweaked-282001:5118388"))
+    runtimeOnly(fg.deobf("curse.maven:suggestion-provider-fix-469647:4591193"))
+
+    //Other
+    implementation(fg.deobf("curse.maven:NaturesAura-306626:4963590"))
+    runtimeOnly(fg.deobf("curse.maven:patchouli-306770:6164575"))
 }
 
 tasks.jar {
