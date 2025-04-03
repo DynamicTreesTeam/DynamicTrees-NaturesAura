@@ -3,7 +3,7 @@ package com.harleyoconnor.dtnaturesaura.util;
 import de.ellpeck.naturesaura.blocks.BlockGoldenLeaves;
 import de.ellpeck.naturesaura.items.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -35,10 +35,10 @@ public final class LootTableHelper {
         ).setParamSet(parameterSet);
     }
 
-    public static class LootTableHooks extends BlockLoot {
+    public static class LootTableHooks extends VanillaBlockLoot {
 
         public static LootTable.Builder createSilkTouchOnlyTable(Block block) {
-            return BlockLoot.createSilkTouchOnlyTable(block);
+            return VanillaBlockLoot.createSilkTouchOnlyTable(block);
         }
 
     }

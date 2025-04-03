@@ -1,0 +1,4 @@
+{
+  "primitive_soil": "naturesaura:nether_grass",
+  "acceptable_soils": [ "fungus_like", "dirt_like", "nether_like", "nether_soil_like" ]
+}
